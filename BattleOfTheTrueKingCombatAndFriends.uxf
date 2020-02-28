@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>21</x>
+      <y>245</y>
+      <w>378</w>
+      <h>385</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+- map : Map
+- players : ArrayList&lt;Player&gt;
+--
+_- addPlayer(player : Player) : void_
+
+
+_- run() : void_
+_- mainMenu() : void_
+_- playGame(mode : int) : void_
+_- setCharacter(player : Player) : void_
+
+
+_- combat(attacker : Player, defender : Player) : boolean_
+_- hitChance(attacker : Player, defender : Player) : float_
+_- damageMin(attacker : Player, defender : Player) : int_
+_- damageMax(attacker : Player, defender : Player) : int_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>28</x>
+      <y>49</y>
+      <w>147</w>
+      <h>133</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+
+--
+_main(args : String[ ]) : void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>63</y>
+      <w>210</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+- health : int
+- maxHealth : int
+- wisdom : int
+- strength : int
+- agility : int
+- dexterity : int
+- weapon : Weapon
+- armor : Armor
+--
+&lt;&lt;appropriate getters and setters&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>658</x>
+      <y>42</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>WeaponType
+&lt;&lt;enum&gt;&gt;
+--
+BLUNT,
+PIERCE,
+SLASH</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>742</x>
+      <y>42</y>
+      <w>84</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>ArmorType
+&lt;&lt;enum&gt;&gt;
+--
+PADDED,
+MAIL,
+PLATE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>651</x>
+      <y>504</y>
+      <w>469</w>
+      <h>238</h>
+    </coordinates>
+    <panel_attributes>combat
+	attacker &amp; target
+		-damage type &amp; armor type respectively
+		-relevent offensive and defensive stats based on classes
+	calculate hit percentage
+		-if ranged attack, factor in range and obstacles in the way
+		-if melee, mostly gonna be a formula based on attackers strength and enemy's agility
+		-if magic, dimilar to ranged, but using wisdom
+	roll to hit
+	if it's a hit{
+		use attackers damage type and defenders armor type to determine possible damage range and crit chance
+		roll for damage/is crit
+		subtract damage from target's health
+		if their health is below 0{
+			indicate they are dead and declare the attacker the true king
+			end the game and prompt for another
+		}
+	}
+	end combat
+bg=cyan
+
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>602</x>
+      <y>126</y>
+      <w>126</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Weapon
+--
+- name : String
+- damageType : Type
+- damageRating : int
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>854</x>
+      <y>42</y>
+      <w>70</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>SpellType
+&lt;&lt;enum&gt;&gt;
+--
+FIRE,
+HEAL,
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>784</x>
+      <y>126</y>
+      <w>126</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Armor
+--
+- name : String
+- armorType : Type
+- armorRating : int
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
