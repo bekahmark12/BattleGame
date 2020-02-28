@@ -55,6 +55,7 @@ _- mainMenu() : void_
 _- playGame(mode : int) : void_
 _- customizeCharacters() : void_
 _- setCharacter(player : Player) : void_
+_- determineMoves(player : Player) : String[ ]_
 _- movePlayer(player : Player, row : int, col : int) : void_
 
 
@@ -134,7 +135,7 @@ PLATE</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>405</y>
+      <y>535</y>
       <w>50</w>
       <h>45</h>
     </coordinates>
@@ -216,12 +217,13 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>635</x>
-      <y>180</y>
+      <x>640</x>
+      <y>130</y>
       <w>220</w>
-      <h>290</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes>Player
+&lt;&lt;abstract&gt;&gt;
 --
 - name : String
 - health : int
@@ -234,6 +236,7 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
 - icon : Icons
 - class : Class
 - race : Race
+- armor : Armor
 
 --
 + Player(name : String) &lt;&lt;ctor&gt;&gt;
@@ -244,6 +247,8 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
 + setHealth(health : int) : void
 + getMaxHealth() : int
 /+ setMaxHealth(max : int) : void&lt;&lt;abstract&gt;&gt;/
++ getStamina() : int
+/+ setStamina(s : int) : void&lt;&lt;abstract&gt;&gt;/
 + getStrength() : int
 /+ setStrength(strength : int) : void&lt;&lt;abstract&gt;&gt;/
 + getAgility() : int
@@ -255,7 +260,9 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
 + getIcon() : Icons
 + setIcon(icon : Icons) : void
 + getRace() : race
-+ setRace(race : Race) : void</panel_attributes>
++ setRace(race : Race) : void
++ getArmor() : Armor
+/+ setArmor(armor : Armor) : void&lt;&lt;abstract&gt;&gt;/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -278,45 +285,55 @@ _+ printBoard(grid : Icons) : void_
     <id>UMLClass</id>
     <coordinates>
       <x>435</x>
-      <y>125</y>
+      <y>120</y>
       <w>145</w>
-      <h>90</h>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Warrior
 --
-
+- weapon : Weapon
 --
++ getweapon() : Weapon
++ setWeapon(weapon : Weapon) : void
+
 + setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
 + setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setStamina(s : int) : void &lt;&lt;override&gt;&gt;
 + setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
 + setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
-+ setDex(dex : int) : void &lt;&lt;override&gt;&gt;</panel_attributes>
++ setDex(dex : int) : void &lt;&lt;override&gt;&gt;
++ setArmor(armor : Armor) : void &lt;&lt;override&gt;&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>435</x>
-      <y>220</y>
+      <y>240</y>
       <w>145</w>
-      <h>80</h>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Archer
 --
-
+- weapon : Weapon
 --
++ getweapon() : Weapon
++ setWeapon(weapon : Weapon) : void
+
 + setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
 + setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setStamina(s : int) : void &lt;&lt;override&gt;&gt;
 + setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
 + setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
-+ setDex(dex : int) : void &lt;&lt;override&gt;&gt;</panel_attributes>
++ setDex(dex : int) : void &lt;&lt;override&gt;&gt;
++ setArmor(armor : Armor) : void &lt;&lt;override&gt;&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>435</x>
-      <y>310</y>
+      <y>355</y>
       <w>145</w>
       <h>80</h>
     </coordinates>
@@ -326,9 +343,11 @@ _+ printBoard(grid : Icons) : void_
 --
 + setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
 + setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setStamina(s : int) : void &lt;&lt;override&gt;&gt;
 + setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
 + setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
 + setDex(dex : int) : void &lt;&lt;override&gt;&gt;
++ setArmor(armor : Armor) : void &lt;&lt;override&gt;&gt;
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -336,34 +355,34 @@ _+ printBoard(grid : Icons) : void_
     <id>Relation</id>
     <coordinates>
       <x>575</x>
-      <y>185</y>
-      <w>70</w>
-      <h>45</h>
+      <y>165</y>
+      <w>75</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;70.0</additional_attributes>
+    <additional_attributes>10.0;40.0;130.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>575</x>
-      <y>245</y>
-      <w>70</w>
-      <h>20</h>
+      <y>200</y>
+      <w>75</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;20.0</additional_attributes>
+    <additional_attributes>10.0;140.0;130.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>575</x>
-      <y>330</y>
-      <w>70</w>
-      <h>20</h>
+      <y>280</y>
+      <w>75</w>
+      <h>115</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;10.0</additional_attributes>
+    <additional_attributes>10.0;210.0;130.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -449,24 +468,24 @@ _+ printBoard(grid : Icons) : void_
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>850</x>
-      <y>225</y>
-      <w>80</w>
-      <h>30</h>
+      <x>855</x>
+      <y>190</y>
+      <w>75</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;40.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;130.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>850</x>
-      <y>355</y>
-      <w>70</w>
-      <h>25</h>
+      <x>855</x>
+      <y>315</y>
+      <w>65</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;30.0;120.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -548,7 +567,7 @@ bg=red</panel_attributes>
       <x>115</x>
       <y>135</y>
       <w>285</w>
-      <h>90</h>
+      <h>95</h>
     </coordinates>
     <panel_attributes>libraries
 --
@@ -561,9 +580,10 @@ bg=yellow</panel_attributes>
       <x>120</x>
       <y>150</y>
       <w>270</w>
-      <h>70</h>
+      <h>75</h>
     </coordinates>
     <panel_attributes>ConsoleIO
+&lt;&lt;library&gt;&gt;
 --
 _- buffy : BufferedReader_
 --
@@ -579,12 +599,12 @@ layer=1</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>415</y>
-      <w>245</w>
-      <h>90</h>
+      <y>420</y>
+      <w>250</w>
+      <h>85</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;160.0;470.0;10.0</additional_attributes>
+    <additional_attributes>10.0;150.0;480.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
