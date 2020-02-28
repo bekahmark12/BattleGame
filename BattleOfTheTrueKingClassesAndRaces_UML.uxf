@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>693</x>
+      <y>28</y>
+      <w>119</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>Main
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>980</x>
+      <y>511</y>
+      <w>273</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>Board
+-
+- gameBoard : String[][]
+- rows : int
+- cols : int
+- rand : Random
+-
++ createBoard() : String[][]
++ printBoard(2DBoardArray : String[][]): void
+
+**Possible hardcoded values for 3 different boards? If so let's
+make a separate class for each board (board1, board2...) ?**</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>462</y>
+      <w>280</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>Player
+-
+- weapon : WEAPON
+- armor : ARMOR
+- agility : int
+- health : int
+- maxHealth : int
+- wisdom : int
+- strength : int
+- dexterity : int
+- name : String
+-
++ getStats() : int
++ setStats(stats : int) : void
++ getWeapon() : WEAPON
++ setWeapon(weapon : WEAPON) : void
++ getArmor() : ARMOR
++ setArmor(armor : ARMOR) : void
++ getHealth() : int
++ setHealth(speed : int) : void
++ getMaxHealth() : int
++ setMaxHealth(speed : int) : void
++ getName() : String
++ setName(name : String) : void
++ getWisdom() : int
++ setWisdom(wisdom : int) : void
++ getStrength() : int
++ setStrength(strength : int) : void
++ getdexterity() : int
++ setDexterity(dexterity : int) : void
++ checkForEnemy(currentIndex : int, checkDirection : int) : ?
++ player(stats : int, weapon : WEAPON, armor : ARMOR,
+speed : int, name, String) : PLAYER &lt;&lt;ctor&gt;&gt;
++ toString() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>903</x>
+      <y>742</y>
+      <w>147</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>742</y>
+      <w>133</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;10.0;10.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>770</x>
+      <y>847</y>
+      <w>21</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>238</y>
+      <w>280</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>GameController
+-
+
+-
++ promptForMenuSelection
++ run() : void
++ movePlayer(player : Player, gameBoard : String[][]) : void
++ attack(?) : ?
++ checkForEnemy(player : Player, gameBoard : String[][]) ??
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>7</x>
+      <y>441</y>
+      <w>1288</w>
+      <h>889</h>
+    </coordinates>
+    <panel_attributes>Models
+--
+bg=white
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>609</x>
+      <y>210</y>
+      <w>364</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>Controllers
+--
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>630</x>
+      <y>0</y>
+      <w>224</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Prog
+--
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>273</x>
+      <y>525</y>
+      <w>140</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Armor
+-
+- armorType : ArmorType
+- armorRating : int
+
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>427</x>
+      <y>525</y>
+      <w>140</w>
+      <h>49</h>
+    </coordinates>
+    <panel_attributes>Weapon
+-
+- damageType : WeaponType
+- damageRating : int
+
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>406</x>
+      <y>616</y>
+      <w>77</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>ArmorType
+&lt;&lt;enum&gt;&gt;
+-
+PADDED,
+MAIL,
+PLATE
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>623</y>
+      <w>70</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>WeaponType
+&lt;&lt;enum&gt;&gt;
+-
+BLUNT,
+PIERCE,
+SLASH
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>917</y>
+      <w>280</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>Mage
+-
+- weapon : WEAPON
+- armor : ARMOR
+- agility : int
+- health : int
+- maxHealth : int
+- wisdom : int
+- strength : int
+- dexterity : int
+- name : String
+-
++ getStats() : int
++ setStats(stats : int) : void
++ getWeapon() : WEAPON
++ setWeapon(weapon : WEAPON) : void
++ getArmor() : ARMOR
++ setArmor(armor : ARMOR) : void
++ getHealth() : int
++ setHealth(speed : int) : void
++ getMaxHealth() : int
++ setMaxHealth(speed : int) : void
++ getName() : String
++ setName(name : String) : void
++ getWisdom() : int
++ setWisdom(wisdom : int) : void
++ getStrength() : int
++ setStrength(strength : int) : void
++ getdexterity() : int
++ setDexterity(dexterity : int) : void
++ checkForEnemy(currentIndex : int, checkDirection : int) : ?
++ player(stats : int, weapon : WEAPON, armor : ARMOR,
+speed : int, name, String) : PLAYER &lt;&lt;ctor&gt;&gt;
++ toString() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>917</y>
+      <w>280</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>Elf
+-
+- weapon : WEAPON
+- armor : ARMOR
+- agility : int
+- health : int
+- maxHealth : int
+- wisdom : int
+- strength : int
+- dexterity : int
+- name : String
+-
++ getStats() : int
++ setStats(stats : int) : void
++ getWeapon() : WEAPON
++ setWeapon(weapon : WEAPON) : void
++ getArmor() : ARMOR
++ setArmor(armor : ARMOR) : void
++ getHealth() : int
++ setHealth(speed : int) : void
++ getMaxHealth() : int
++ setMaxHealth(speed : int) : void
++ getName() : String
++ setName(name : String) : void
++ getWisdom() : int
++ setWisdom(wisdom : int) : void
++ getStrength() : int
++ setStrength(strength : int) : void
++ getdexterity() : int
++ setDexterity(dexterity : int) : void
++ checkForEnemy(currentIndex : int, checkDirection : int) : ?
++ player(stats : int, weapon : WEAPON, armor : ARMOR,
+speed : int, name, String) : PLAYER &lt;&lt;ctor&gt;&gt;
++ toString() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>952</x>
+      <y>917</y>
+      <w>280</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>Dwarf
+-
+- weapon : WEAPON
+- armor : ARMOR
+- agility : int
+- health : int
+- maxHealth : int
+- wisdom : int
+- strength : int
+- dexterity : int
+- name : String
+-
++ getStats() : int
++ setStats(stats : int) : void
++ getWeapon() : WEAPON
++ setWeapon(weapon : WEAPON) : void
++ getArmor() : ARMOR
++ setArmor(armor : ARMOR) : void
++ getHealth() : int
++ setHealth(speed : int) : void
++ getMaxHealth() : int
++ setMaxHealth(speed : int) : void
++ getName() : String
++ setName(name : String) : void
++ getWisdom() : int
++ setWisdom(wisdom : int) : void
++ getStrength() : int
++ setStrength(strength : int) : void
++ getdexterity() : int
++ setDexterity(dexterity : int) : void
++ checkForEnemy(currentIndex : int, checkDirection : int) : ?
++ player(stats : int, weapon : WEAPON, armor : ARMOR,
+speed : int, name, String) : PLAYER &lt;&lt;ctor&gt;&gt;
++ toString() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
