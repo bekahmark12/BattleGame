@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1152</x>
+      <y>24</y>
+      <w>402</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>combat
+	attacker &amp; target
+		-damage type &amp; armor type respectively
+		-relevent offensive and defensive stats based on classes
+	calculate hit percentage
+		-if ranged attack, factor in range and obstacles in the way
+		-if melee, mostly gonna be a formula based on attackers strength and enemy's agility
+		-if magic, dimilar to ranged, but using wisdom
+	roll to hit
+	if it's a hit{
+		use attackers damage type and defenders armor type to determine possible damage range and crit chance
+		roll for damage/is crit
+		subtract damage from target's health
+		if their health is below 0{
+			indicate they are dead and declare the attacker the true king
+			end the game and prompt for another
+		}
+	}
+	end combat
+bg=cyan
+
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>192</y>
+      <w>324</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>GameController
+--
+- map : Map
+- players : ArrayList&lt;Player&gt;
+--
+_- addPlayer(player : Player) : void_
+
+
+
+_- run() : void_
+_- mainMenu() : void_
+_- playGame(mode : int) : void_
+_- setCharacter(player : Player) : void_
+_+ movePlayer(player : Player, row : int, col : int) : void_
+
+
+_- combat(attacker : Player, defender : Player) : boolean_
+_- hitChance(attacker : Player, defender : Player) : float_
+_- damageMin(attacker : Player, defender : Player) : int_
+_- damageMax(attacker : Player, defender : Player) : int_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>0</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+
+--
+_main(args : String[ ]) : void_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1410</x>
+      <y>588</y>
+      <w>60</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>WeaponType
+&lt;&lt;enum&gt;&gt;
+--
+BLUNT,
+PIERCE,
+SLASH</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>384</y>
+      <w>72</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>ArmorType
+&lt;&lt;enum&gt;&gt;
+--
+PADDED,
+MAIL,
+PLATE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1368</x>
+      <y>444</y>
+      <w>108</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Weapon
+--
+- name : String
+- damageType : Type
+- damageRating : int
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1542</x>
+      <y>570</y>
+      <w>60</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>SpellType
+&lt;&lt;enum&gt;&gt;
+--
+FIRE,
+HEAL,
+SHIELD
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1380</x>
+      <y>282</y>
+      <w>108</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Armor
+--
+- name : String
+- armorType : Type
+- armorRating : int
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1182</x>
+      <y>636</y>
+      <w>102</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>Icons
+&lt;&lt;enum&gt;&gt;
+--
+P &lt;&lt;Player&gt;&gt;
+E &lt;&lt;Enemy&gt;&gt;
+T &lt;&lt;Tree&gt;&gt;
+O &lt;&lt;Rock&gt;&gt;
+_ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1116</x>
+      <y>684</y>
+      <w>78</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>636</y>
+      <w>138</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>Map
+--
+- row : int
+- col : int
+- grid : Icons[ ][ ]
+--
+/+ populateMap(grid : Icons) : void&lt;&lt;abstract&gt;&gt;/
++ checkValidSpace(row : int, cols : int) : boolean
+
++ getGrid() : Icons[ ][ ]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1038</x>
+      <y>264</y>
+      <w>264</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+- name : String
+- health : int
+- maxHealth : int
+- stamina : int
+- strength : int
+- agility : int
+- wisdom : int
+- dexterity : int
+- icon : Icons
+- class : Class
+- race : Race
+
+--
++ Player(name : String) &lt;&lt;ctor&gt;&gt;
+
++ getName() : String
++ setName(name : String) : void
++ getHealth() : int
++ setHealth(health : int) : void
++ getMaxHealth() : int
+/+ setMaxHealth(max : int) : void&lt;&lt;abstract&gt;&gt;/
++ getStrength() : int
+/+ setStrength(strength : int) : void&lt;&lt;abstract&gt;&gt;/
++ getAgility() : int
+/+ setAgility(agility : int) : void&lt;&lt;abstract&gt;&gt;/
++ getWisdom() : int
+/+ setWisdom(wisdom : int) : void&lt;&lt;abstract&gt;&gt;/
++ getDex() : int
+/+ setDex(dex : int) : void&lt;&lt;abstract&gt;&gt;/
++ getIcon() : Icons
++ setIcon(icon : Icons) : void
++ getRace() : race
++ setRace(race : Race) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>282</y>
+      <w>120</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>MapView
+--
+
+--
++ printBoard(grid : Icons) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1398</x>
+      <y>696</y>
+      <w>234</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Board
+-
+- gameBoard : String[][]
+- rows : int
+- cols : int
+- rand : Random
+-
++ createBoard() : String[][]
++ printBoard(2DBoardArray : String[][]): void
+
+**Possible hardcoded values for 3 different boards? If so let's
+make a separate class for each board (board1, board2...) ?**</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>198</y>
+      <w>174</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Warrior
+--
+
+--
++ setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
++ setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
++ setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
++ setDex(dex : int) : void &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>312</y>
+      <w>174</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Archer
+--
+
+--
++ setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
++ setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
++ setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
++ setDex(dex : int) : void &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>798</x>
+      <y>420</y>
+      <w>174</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Wizard
+--
+
+--
++ setMaxHealth(max : int) : void &lt;&lt;override&gt;&gt;
++ setStrength(strength : int) : void &lt;&lt;override&gt;&gt;
++ setAgility(agility : int) : void &lt;&lt;override&gt;&gt;
++ setWisdom(wisdom : int) : void &lt;&lt;override&gt;&gt;
++ setDex(dex : int) : void &lt;&lt;override&gt;&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>966</x>
+      <y>270</y>
+      <w>84</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>966</x>
+      <y>342</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>966</x>
+      <y>444</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1134</x>
+      <y>768</y>
+      <w>138</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Board3
+--
+
+--
+
++ populateMap() : void &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>978</x>
+      <y>768</y>
+      <w>138</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Board2
+--
+
+--
+
++ populateMap() : void &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>822</x>
+      <y>768</y>
+      <w>138</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Board1
+--
+
+--
+
++ populateMap() : void &lt;&lt;override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>912</x>
+      <y>714</y>
+      <w>84</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;90.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1014</x>
+      <y>732</y>
+      <w>48</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>732</y>
+      <w>114</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;</panel_attributes>
+    <additional_attributes>170.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>318</y>
+      <w>96</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;40.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1296</x>
+      <y>474</y>
+      <w>84</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1482</x>
+      <y>330</y>
+      <w>78</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1422</x>
+      <y>534</y>
+      <w>30</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;90.0</additional_attributes>
+  </element>
+</diagram>
