@@ -1,10 +1,21 @@
 package models;
 
+
 public class MapFactory {
-    private Icons grid;
+    private static Icons[][] grid = new Icons[25][20];
 
     public static Map makeMap(int varient){
-        throw new UnsupportedOperationException("This has not yet been implemented.");
+       switch (varient){
+           case 1:
+               map1();
+               break;
+           case 2:
+               map2();
+               break;
+           case 3:
+               map3();
+               break;
+       }
     }
 
     private static Icons[][] map1(){

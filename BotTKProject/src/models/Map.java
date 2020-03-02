@@ -3,7 +3,7 @@ package models;
 public class Map {
     private int row;
     private int col;
-    private Icons[][] grid;
+    private Icons[][] grid = new Icons[25][20];
 
     public void populateMap(Icons[][] grid){
 
