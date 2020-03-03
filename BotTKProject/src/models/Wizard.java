@@ -3,21 +3,19 @@ package models;
 import java.util.ArrayList;
 
 public class Wizard extends Player{
-    private ArrayList<Spell> spells;
+    private Spell[] spells;
 
-    public ArrayList<Spell> getSpells() {
+    public Spell[] getSpells() {
         return spells;
     }
 
-    public void setSpells(ArrayList<Spell> spells) {
-        this.spells = spells;
-
-
+    public void setSpells(Spell[] spells) {
+        this.spells = getSpells();
     }
 
-    public Wizard(String name, int health, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, ArrayList<Spell> spells) {
-        super(name, health, maxHealth, stamina, strength, agility, wisdom, dexterity);
-        this.spells = spells;
+    public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Spell[] spells, Icons icon, Armor armor) {
+        super(name, icon);
+        this.spells = getSpells();
     }
 
     @Override
@@ -25,5 +23,40 @@ public class Wizard extends Player{
         return "Wizard{" +
                 "spells=" + spells +
                 '}';
+    }
+
+    @Override
+    public void setMaxHealth(int maxHealth) {
+
+    }
+
+    @Override
+    public void setStamina(int stamina) {
+
+    }
+
+    @Override
+    public void setStrength(int strength) {
+
+    }
+
+    @Override
+    public void setAgility(int agility) {
+
+    }
+
+    @Override
+    public void setWisdom(int wisdom) {
+
+    }
+
+    @Override
+    public void setDexterity(int dexterity) {
+
+    }
+
+    @Override
+    public void setArmor(Armor armor) {
+
     }
 }
