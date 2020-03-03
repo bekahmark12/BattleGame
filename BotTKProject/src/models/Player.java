@@ -1,5 +1,6 @@
 package models;
 
+
 public abstract class Player {
     private String name;
     private int health;
@@ -10,6 +11,12 @@ public abstract class Player {
     private int wisdom;
     private int dexterity;
     private Icons icon;
+    private Armor armor;
+
+    public Player(String name, Icons icon) {
+        setName(name);
+        setIcon(icon);
+    }
 
     public String getName() {
         return name;
@@ -31,49 +38,37 @@ public abstract class Player {
         return maxHealth;
     }
 
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
-    }
+    public abstract void setMaxHealth(int maxHealth);
 
     public int getStamina() {
         return stamina;
     }
 
-    public void setStamina(int stamina) {
-        this.stamina = stamina;
-    }
+    public abstract void setStamina(int stamina);
 
     public int getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
+    public abstract void setStrength(int strength);
 
     public int getAgility() {
         return agility;
     }
 
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
+    public abstract void setAgility(int agility);
 
     public int getWisdom() {
         return wisdom;
     }
 
-    public void setWisdom(int wisdom) {
-        this.wisdom = wisdom;
-    }
+    public abstract void setWisdom(int wisdom);
 
     public int getDexterity() {
         return dexterity;
     }
 
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
-    }
+    public abstract void setDexterity(int dexterity);
 
     public Icons getIcon() {
         return icon;
@@ -83,15 +78,10 @@ public abstract class Player {
         this.icon = icon;
     }
 
-    public Player(String name, int health, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity) {
-        this.name = name;
-        this.health = health;
-        this.maxHealth = maxHealth;
-        this.stamina = stamina;
-        this.strength = strength;
-        this.agility = agility;
-        this.wisdom = wisdom;
-        this.dexterity = dexterity;
-        this.icon = icon;
+    public Armor getArmor(){
+        return armor;
     }
+
+    public abstract void setArmor(Armor armor);
+
 }
