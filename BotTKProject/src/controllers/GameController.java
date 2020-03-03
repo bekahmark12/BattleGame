@@ -6,12 +6,12 @@ import models.*;
 public class GameController {
     private static Armor armor;
     private static Weapon weapon;
-
+    private static String name = ConsoleIO.promptForString("Please enter your player's name: ");
 
     public static Player createArcher(){
         Player archer;
-        String name = ConsoleIO.promptForString("Please enter your player's name: ");
-        String[] armorTypes = {"Mail", "Padded"};
+
+        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Leather: type: padded, rating: 3"};
         String[] weaponTypes = {"Bow"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
@@ -37,8 +37,7 @@ public class GameController {
 
     public static Player createWarrior(){
         Player warrior;
-        String name = ConsoleIO.promptForString("Please enter your player's name: ");
-        String[] armorTypes = {"Mail", "Plate"};
+        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Plate: type: steel, rating: 5"};
         String[] weaponTypes = {"Sword", "Spear"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
@@ -69,7 +68,18 @@ public class GameController {
         Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
         Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
         Spell[] spells = {fireBallSpell, healingSpell, shieldSpell};
-        String name = ConsoleIO.promptForString("Please enter your player's name: ");
+        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Plate: type: steel, rating: 5"};
+        ConsoleIO.printString("Please select your armor: ");
+        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
+        switch(armorSelection){
+            case 1:
+                armor = new Armor("Chain Mail", ArmorType.MAIL, 4);
+                break;
+            case 2:
+                armor = new Armor("Plate", ArmorType.PLATE, 5);
+                break;
+        }
+
         Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.T, armor);
         return wizard;
     }
