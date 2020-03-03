@@ -210,10 +210,10 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
 --
 - row : int
 - col : int
-- grid : Icons[ ][ ]
+_- grid : Icons[ ][ ]_
 --
 + populateMap(grid : Icons) : void
-+ checkValidSpace(row : int, cols : int) : boolean
+_+ checkValidSpace(row : int, cols : int) : boolean_
 
 + getGrid() : Icons[ ][ ]</panel_attributes>
     <additional_attributes/>
@@ -603,17 +603,14 @@ layer=1</panel_attributes>
       <x>847</x>
       <y>672</y>
       <w>154</w>
-      <h>98</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>MapFactory
 --
 _- grid : Icons[ ][ ] _
 --
-_+ makeMap(varient : int) : Map_
 
-_- map1() : Icons[ ][ ]_
-_- map2() : Icons[ ][ ]_
-_- map3() : Icons[ ][ ]_</panel_attributes>
+_- randomMap() : Icons[ ][ ]_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -632,13 +629,13 @@ _- map3() : Icons[ ][ ]_</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>784</x>
-      <y>749</y>
+      <y>735</y>
       <w>77</w>
-      <h>63</h>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 </panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
