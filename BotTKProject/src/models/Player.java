@@ -4,14 +4,14 @@ package models;
 public abstract class Player {
     private String name;
     private int health;
-    private int maxHealth;
-    private int stamina;
-    private int strength;
-    private int agility;
-    private int wisdom;
-    private int dexterity;
-    private Icons icon;
-    private Armor armor;
+    protected int maxHealth;
+    protected int stamina;
+    protected int strength;
+    protected int agility;
+    protected int wisdom;
+    protected int dexterity;
+    protected Icons icon;
+    protected Armor armor;
 
     public Player(String name, Icons icon) {
         setName(name);
