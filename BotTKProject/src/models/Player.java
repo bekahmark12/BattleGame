@@ -10,7 +10,7 @@ public abstract class Player {
     protected int agility;
     protected int wisdom;
     protected int dexterity;
-    protected Icons icon;
+    private Icons icon;
     protected Armor armor;
 
     public Player(String name, Icons icon) {
