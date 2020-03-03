@@ -31,7 +31,7 @@ public class GameController {
                 break;
         }
 
-        archer = new Archer(name, 16, 20, 10, 15, 15, 6, weapon, Icons.O, armor);
+        archer = new Archer(name, 16, 20, 10, 15, 15, 6, weapon, armor, Icons.O);
         return archer;
     }
 
