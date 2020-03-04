@@ -99,7 +99,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O, true);
         return ranger;
     }
 
@@ -134,7 +134,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        warrior = new Warrior(name, 20, 30, 25, 10, 15, 4, weapon, Icons.P, armor);
+        warrior = new Warrior(name, 20, 30, 25, 10, 15, 4, weapon, Icons.P, armor, true);
         return warrior;
     }
 
@@ -158,7 +158,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
         }
 
-        Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.T, armor);
+        Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.T, armor, true);
         return wizard;
     }
 
