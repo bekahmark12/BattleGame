@@ -1,12 +1,10 @@
 package models;
 
-import java.io.Serializable;
-
-public class Archer extends Player implements Serializable {
+public class Ranger extends Player{
     private Weapon weapon;
 
 
-    public Archer(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Armor armor, Icons icon, boolean isHuman) {
+    public Ranger(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Armor armor, Icons icon, boolean isHuman) {
         super(name, icon, isHuman);
         setWeapon(weapon);
         setMaxHealth(maxHealth);
