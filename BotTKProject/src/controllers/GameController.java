@@ -53,7 +53,7 @@ public class GameController {
         }
     }
 
-    public static void makePlayer(boolean) {
+    public static void makePlayer() {
         String name = ConsoleIO.promptForString("Enter a name for your character: ");
         String[] playerTypes = {"Archer", "Warrior", "Wizard"};
         int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false);
@@ -76,7 +76,7 @@ public class GameController {
         Weapon weapon;
 
         String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Leather: type: padded, rating: 3"};
-        String[] weaponTypes = {"Longbow: type: Pierce, rating: 8, ideal range: 5"};
+        String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 4", "Longsword: type : slash, rating: 5, ideal range: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false);
         int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false);
@@ -93,13 +93,15 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 8, 5);
+                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 6, 4);
                 break;
+            case 2:
+                weapon = new Weapon( "Longsword", WeaponType.SLASH, 5, 1);
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.P, true);
         return ranger;
     }
 
@@ -134,7 +136,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        warrior = new Warrior(name, 20, 30, 25, 10, 15, 4, weapon, Icons.P, armor);
+        warrior = new Warrior(name, 20, 30, 25, 10, 15, 4, weapon, Icons.P, armor, true);
         return warrior;
     }
 
@@ -158,7 +160,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
         }
 
-        Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.T, armor);
+        Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.P, armor, true);
         return wizard;
     }
 
