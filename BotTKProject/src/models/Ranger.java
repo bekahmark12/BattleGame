@@ -1,6 +1,8 @@
 package models;
 
-public class Ranger extends Player{
+import java.io.Serializable;
+
+public class Ranger extends Player implements Serializable {
     private Weapon weapon;
 
 
