@@ -3,11 +3,13 @@ package controllers;
 import lib.ConsoleIO;
 import models.*;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class GameController {
     private static Map map;
     private static ArrayList<Player> players  = new ArrayList();
+    private static Game game;
 
     public static void addPlayer(Player player){
         players.add(player);
@@ -162,6 +164,26 @@ public class GameController {
         return wizard;
     }
 
+    public static void saveGame(){
+        try{
+            FileOutputStream fout = new FileOutputStream("Save.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(game);
+            oos.flush();
+            oos.close();
+            ConsoleIO.printString("Success");
+        }catch (IOException ioe){}
+
+    }
+
+    public static void loadGame(){
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Save.txt"));
+            Game g = (Game)ois.readObject();
+            ois.close();
+        }catch (IOException | ClassNotFoundException e){}
+
+    }
 
 
 }
