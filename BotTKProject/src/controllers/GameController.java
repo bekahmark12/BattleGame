@@ -119,7 +119,7 @@ public class GameController {
                 armor = new Armor("Chain Mail", ArmorType.MAIL, 5);
                 break;
             case 2:
-                armor = new Armor("Plate", ArmorType.PLATE, 7);
+                armor = new Armor("Steel", ArmorType.PLATE, 7);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
