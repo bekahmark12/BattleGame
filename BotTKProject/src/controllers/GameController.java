@@ -102,7 +102,7 @@ public class GameController {
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
-        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O, true);
         return ranger;
     }
 
