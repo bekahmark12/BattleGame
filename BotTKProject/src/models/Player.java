@@ -3,6 +3,7 @@ package models;
 
 public abstract class Player {
     private String name;
+    public final boolean isHuman;
     private int health;
     protected int maxHealth;
     protected int stamina;
@@ -13,9 +14,10 @@ public abstract class Player {
     private Icons icon;
     protected Armor armor;
 
-    public Player(String name, Icons icon) {
+    public Player(String name, Icons icon, boolean isHuman) {
         setName(name);
         setIcon(icon);
+        this.isHuman = isHuman;
     }
 
     public String getName() {

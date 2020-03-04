@@ -4,8 +4,8 @@ public class Archer extends Player{
     private Weapon weapon;
 
 
-    public Archer(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Armor armor, Icons icon) {
-        super(name, icon);
+    public Archer(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Armor armor, Icons icon, boolean isHuman) {
+        super(name, icon, isHuman);
         setWeapon(weapon);
         setMaxHealth(maxHealth);
         setStamina(stamina);

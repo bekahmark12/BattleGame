@@ -10,7 +10,7 @@ public class Map {
 //        printBoard(randomMap());
 //    }
 
-    private static Icons[][] randomMap(){
+    public static Icons[][] randomMap(){
         int randomE;
         int randomP;
 

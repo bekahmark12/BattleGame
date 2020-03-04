@@ -11,8 +11,8 @@ public class Warrior extends Player{
         this.weapon = weapon;
     }
 
-    public Warrior(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Icons icon, Armor armor) {
-        super(name, icon);
+    public Warrior(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Icons icon, Armor armor, boolean isHuman) {
+        super(name, icon, isHuman);
         this.weapon = getWeapon();
     }
 

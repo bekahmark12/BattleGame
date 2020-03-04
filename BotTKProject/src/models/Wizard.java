@@ -13,8 +13,8 @@ public class Wizard extends Player{
         this.spells = getSpells();
     }
 
-    public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Spell[] spells, Icons icon, Armor armor) {
-        super(name, icon);
+    public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Spell[] spells, Icons icon, Armor armor, boolean isHuman) {
+        super(name, icon, isHuman);
         this.spells = getSpells();
     }
 
