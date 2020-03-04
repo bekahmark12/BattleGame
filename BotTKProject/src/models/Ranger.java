@@ -46,8 +46,8 @@ public class Ranger extends Player implements Serializable {
 
     @Override
     public void setStrength(int strength) {
-        if(strength > 4){
-            throw new IllegalArgumentException("Archer's stamina cannot be more than 4");
+        if(strength > 7){
+            throw new IllegalArgumentException("Archer's stamina cannot be more than 7");
         }
         this.strength = strength;
     }
@@ -71,7 +71,7 @@ public class Ranger extends Player implements Serializable {
     @Override
     public void setDexterity(int dexterity) {
         if(dexterity > 15){
-            throw new IllegalArgumentException("Archer's dexterity cannot be morethan 15");
+            throw new IllegalArgumentException("Archer's dexterity cannot be more than 15");
         }
         this.dexterity = dexterity;
     }

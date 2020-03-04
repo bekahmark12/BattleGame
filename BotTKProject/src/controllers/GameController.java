@@ -3,11 +3,13 @@ package controllers;
 import lib.ConsoleIO;
 import models.*;
 
+import java.io.*;
 import java.util.ArrayList;
 
 public class GameController {
     private static Map map;
     private static ArrayList<Player> players  = new ArrayList();
+    private static Game game;
 
     public static void addPlayer(Player player){
         players.add(player);
@@ -53,7 +55,7 @@ public class GameController {
         }
     }
 
-    public static void makePlayer(boolean) {
+    public static void makePlayer() {
         String name = ConsoleIO.promptForString("Enter a name for your character: ");
         String[] playerTypes = {"Archer", "Warrior", "Wizard"};
         int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false);
@@ -76,7 +78,7 @@ public class GameController {
         Weapon weapon;
 
         String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Leather: type: padded, rating: 3"};
-        String[] weaponTypes = {"Longbow: type: Pierce, rating: 8, ideal range: 5"};
+        String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 4", "Longsword: type : slash, rating: 5, ideal range: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false);
         int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false);
@@ -93,13 +95,14 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 8, 5);
+                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 6, 4);
                 break;
+            case 2:
+                weapon = new Weapon( "Longsword", WeaponType.SLASH, 5, 1);
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
-
-        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O, true);
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
         return ranger;
     }
 
@@ -162,6 +165,26 @@ public class GameController {
         return wizard;
     }
 
+    public static void saveGame(){
+        try{
+            FileOutputStream fout = new FileOutputStream("Save.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(game);
+            oos.flush();
+            oos.close();
+            ConsoleIO.printString("Success");
+        }catch (IOException ioe){}
+
+    }
+
+    public static void loadGame(){
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Save.txt"));
+            Game g = (Game)ois.readObject();
+            ois.close();
+        }catch (IOException | ClassNotFoundException e){}
+
+    }
 
 
 }
