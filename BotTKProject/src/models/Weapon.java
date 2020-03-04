@@ -1,6 +1,8 @@
 package models;
 
-public class Weapon {
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
     private final String name;
     private final WeaponType damageType;
     private final int damageRating;

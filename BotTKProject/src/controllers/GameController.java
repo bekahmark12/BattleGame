@@ -3,7 +3,6 @@ package controllers;
 import lib.ConsoleIO;
 import models.*;
 
-import java.io.Console;
 import java.util.ArrayList;
 
 public class GameController {
@@ -54,14 +53,13 @@ public class GameController {
         }
     }
 
-    public static void makePlayer() {
+    public static void makePlayer(boolean) {
         String name = ConsoleIO.promptForString("Enter a name for your character: ");
         String[] playerTypes = {"Archer", "Warrior", "Wizard"};
-        Armor armor;
         int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false);
         switch(selectPlayerType){
             case 1:
-                addPlayer(createArcher(name));
+                addPlayer(createRanger(name));
                 break;
             case 2:
                 addPlayer(createWarrior(name));
@@ -72,8 +70,8 @@ public class GameController {
         }
     }
 
-    public static Player createArcher(String name){
-        Player archer;
+    public static Player createRanger(String name){
+        Player ranger;
         Armor armor;
         Weapon weapon;
 
@@ -95,14 +93,14 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Bow", WeaponType.PEIRCE, 8, 5);
+                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 8, 5);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        archer = new Archer(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
-        return archer;
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O);
+        return ranger;
     }
 
     public static Player createWarrior(String name){

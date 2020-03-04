@@ -1,6 +1,8 @@
 package models;
 
-public class Armor {
+import java.io.Serializable;
+
+public class Armor implements Serializable {
     public final String name;
     public final ArmorType armorType;
     public final int armorRating;

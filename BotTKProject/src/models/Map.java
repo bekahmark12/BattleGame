@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Map {
+public class Map implements Serializable {
     private static Icons[][] grid = new Icons[12][24];
     private static Random rng = new Random();
 
@@ -63,7 +64,7 @@ public class Map {
         }
     }
 
-    public Icons[][] getGrid() {
+    public static Icons[][] getGrid() {
         return grid;
     }
 }
