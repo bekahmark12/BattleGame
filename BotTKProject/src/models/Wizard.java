@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Wizard extends Player{
+public class Wizard extends Player implements Serializable {
     private Spell[] spells;
 
     public Spell[] getSpells() {

@@ -1,6 +1,8 @@
 package models;
 
-public class Archer extends Player{
+import java.io.Serializable;
+
+public class Archer extends Player implements Serializable {
     private Weapon weapon;
 
 

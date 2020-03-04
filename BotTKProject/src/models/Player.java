@@ -1,7 +1,9 @@
 package models;
 
 
-public abstract class Player {
+import java.io.Serializable;
+
+public abstract class Player implements Serializable {
     private String name;
     public final boolean isHuman;
     private int health;
