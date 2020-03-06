@@ -4,7 +4,9 @@
     <list default="true" id="94db5242-e336-49ad-aa22-4b912854966c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/prog/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/prog/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MasterUML.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterUML.uxf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +79,9 @@
       <updated>1583093025357</updated>
       <workItem from="1583093030017" duration="1559000" />
       <workItem from="1583184721905" duration="673000" />
+      <workItem from="1583441329349" duration="49000" />
+      <workItem from="1583442450089" duration="3572000" />
+      <workItem from="1583527531536" duration="2000" />
     </task>
     <servers />
   </component>

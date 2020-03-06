@@ -5,22 +5,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class AIPlayer {
-    String randName;
-    Armor randArmor;
-    Weapon randWeapon;
-    int randMaxHealth;
-    int randStamina;
-    int randStrength;
-    int randAgility;
-    int randWisdom;
-    Icon randIcon;
-    Armor mail = new Armor("Chain Mail", ArmorType.MAIL, 5);
-    Armor gambeson = new Armor("Gambeson", ArmorType.PADDED, 3);
-    Armor steel = new Armor("Steel Plate", ArmorType.PLATE, 7);
-    Armor cloak = new Armor("Cloak", ArmorType.PADDED, 4);
-    Random rand = new Random();
-    int possibleArmorOrWeapon = rand.nextInt(2);
-    Player player;
+    private String randName;
+    private Armor randArmor;
+    private Weapon randWeapon;
+    private int randMaxHealth;
+    private int randStamina;
+    private int randStrength;
+    private int randAgility;
+    private int randWisdom;
+    private Icon randIcon;
+    private Armor mail = new Armor("Chain Mail", ArmorType.MAIL, 5);
+    private Armor gambeson = new Armor("Gambeson", ArmorType.PADDED, 3);
+    private Armor steel = new Armor("Steel Plate", ArmorType.PLATE, 7);
+    private Armor cloak = new Armor("Cloak", ArmorType.PADDED, 4);
+    private Random rand = new Random();
+    private int possibleArmorOrWeapon = rand.nextInt(2);
+    private Player player;
 
 
     public Player generateAIPlayer(){
