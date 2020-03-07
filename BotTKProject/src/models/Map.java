@@ -42,11 +42,11 @@ public class Map implements Serializable {
     }
 
     public static boolean checkValidSpace(int row, int cols){
-        boolean isInvalid = false;
+        boolean isValid = false;
         if(grid[row][cols] == null || grid[row][cols] == Icons._){
-            isInvalid = true;
+            isValid = true;
         }
-        return isInvalid;
+        return isValid;
     }
 
 
@@ -62,6 +62,10 @@ public class Map implements Serializable {
             }
             System.out.println();
         }
+    }
+
+    public void setIcon(Icons[][] map, int row, int col){
+        map[row][col] = Icons.P;
     }
 
     public static Icons[][] getGrid() {

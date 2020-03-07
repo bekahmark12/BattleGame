@@ -184,13 +184,67 @@ public class GameController {
         return wizard;
     }
 
+    public void takeHumanTurn(Icons[][] map, int row, int col, Player p){
+        //int playerPosition = map[row][col];
+        int maxMoves = p.getDexterity();
+        String[] playerOptions = {"Move Up", "Move Down", "Move Right", "Move Left", "End Turn"};
+        int move = 0;
+        do{
+            int userChoice = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            switch(userChoice){
+                case 1:
+                    if(map.checkValidSpace(row - 1, col)) {
+                        map.setIcon(map, row - 1, col);
+                        move ++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 2:
+                    if(map.checkValidSpace(row + 1, col)) {
+                        map.setIcon(map, row + 1, col);
+                        move++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 3:
+                    if(map.checkValidSpace(row, col - 1)) {
+                        map.setIcon(map, row, col - 1);
+                        move++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 4:
+                    if(map.checkValidSpace(row, col +1)) {
+                        map.setIcon(map, row, col + 1);
+                        move++;
+                    } else{
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+            }
+        } while(move <= maxMoves);
+        //somehow pass in the current instance of the board/map to call methods on?
+        //get the players dexterity to set movement limit
+        //player can move in any direction as long as that space is an _
+        //Player moves by being prompted for up, down, left, or right
+        //or figure out how to bind arrow key strokes to up down left right
+        //Player turn ends when they run out of moves or select end turn
+        //Make sure board dynamically updates itself after every change instead of reprinting entire console
+
+    }
+
     public static void saveGame(){
+        game.setSavedMap(map);
+        game.setSavedPlayers(players);
         try{
             FileOutputStream fout = new FileOutputStream("Save.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(game);
-            oos.flush();
             oos.close();
+            fout.close();
             ConsoleIO.printString("Success");
         }catch (IOException ioe){}
 
@@ -198,11 +252,12 @@ public class GameController {
 
     public static void loadGame(){
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Save.txt"));
-            Game g = (Game)ois.readObject();
-            ois.close();
+            FileInputStream fileIn = new FileInputStream("Save.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            game = (Game) in.readObject();
+            fileIn.close();
+            in.close();
         }catch (IOException | ClassNotFoundException e){}
-
     }
 
 
