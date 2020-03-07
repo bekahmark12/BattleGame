@@ -15,6 +15,8 @@ public abstract class Player implements Serializable {
     protected int dexterity;
     private Icons icon;
     protected Armor armor;
+    private int col;
+    private int row;
 
     public Player(String name, Icons icon, boolean isHuman) {
         setName(name);
@@ -36,6 +38,22 @@ public abstract class Player implements Serializable {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public int getMaxHealth() {

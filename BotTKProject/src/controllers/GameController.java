@@ -5,18 +5,19 @@ import models.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameController {
-    private static Map map;
+    private static Map map = new Map();
     private static ArrayList<Player> players  = new ArrayList();
     private static Game game;
+    private static boolean isPlayer1Turn;
 
     public static void addPlayer(Player player){
         players.add(player);
     }
 
     public static void newMap(){
-        map = new Map();
         map.randomMap();
     }
 
@@ -34,18 +35,21 @@ public class GameController {
                 break;
             case 2:
                 loadGame();
+                playGame();
                 break;
         }
     }
 
     public static void startGame() {
         players = new ArrayList<>();
+        newMap();
+        isPlayer1Turn = flipTheCoin();
         String[] gameTypes = {"1 Player", "2 Player"};
         int selection = ConsoleIO.promptForMenuSelection(gameTypes, false);
         switch(selection){
             case 1:
                 makePlayer();
-                makeAI();
+//                makeAI();
                 playGame();
                 break;
             case 2:
@@ -53,11 +57,26 @@ public class GameController {
                 makePlayer();
                 playGame();
         }
+
+    }
+
+    public static void playGame(){
+
+    }
+
+    public static boolean flipTheCoin(){
+        Random rng = new Random();
+        boolean result = false;
+        int side = rng.nextInt(2);
+        if(side == 0){
+            result = true;
+        }
+        return result;
     }
 
     public static void makePlayer() {
         String name = ConsoleIO.promptForString("Enter a name for your character: ");
-        String[] playerTypes = {"Archer", "Warrior", "Wizard"};
+        String[] playerTypes = {"Ranger", "Warrior", "Wizard"};
         int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false);
         switch(selectPlayerType){
             case 1:
@@ -77,7 +96,7 @@ public class GameController {
         Armor armor;
         Weapon weapon;
 
-        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Leather: type: padded, rating: 3"};
+        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Gambeson: type: padded, rating: 3"};
         String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 4", "Longsword: type : slash, rating: 5, ideal range: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false);
@@ -137,7 +156,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
 
-        warrior = new Warrior(name, 20, 30, 25, 10, 15, 4, weapon, Icons.P, armor, true);
+        warrior = new Warrior(name, 35, 5, 10, 6, 4, 6, weapon, Icons.P, armor, true);
         return warrior;
     }
 
