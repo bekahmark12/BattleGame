@@ -166,12 +166,14 @@ public class GameController {
     }
 
     public static void saveGame(){
+        game.setSavedMap(map);
+        game.setSavedPlayers(players);
         try{
             FileOutputStream fout = new FileOutputStream("Save.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(game);
-            oos.flush();
             oos.close();
+            fout.close();
             ConsoleIO.printString("Success");
         }catch (IOException ioe){}
 
@@ -179,11 +181,12 @@ public class GameController {
 
     public static void loadGame(){
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Save.txt"));
-            Game g = (Game)ois.readObject();
-            ois.close();
+            FileInputStream fileIn = new FileInputStream("Save.txt");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            game = (Game) in.readObject();
+            fileIn.close();
+            in.close();
         }catch (IOException | ClassNotFoundException e){}
-
     }
 
 
