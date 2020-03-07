@@ -146,8 +146,19 @@ public class GameController {
     }
 
     private static String[] evaluateOptions(int row, int col, Player p) {
-        
-    }
+        ArrayList<String> optionsList = new ArrayList<>();
+        if(map.checkValidSpace(row + 1, col)) {
+            optionsList.add("Move up");
+        }
+        if(map.checkValidSpace(row - 1, col)) {
+            optionsList.add("Move down");
+        }
+        if(map.checkValidSpace(row, col - 1)) {
+            optionsList.add("Move left");
+        }
+
+
+        }
 
     public static boolean flipTheCoin(){
         Random rng = new Random();
