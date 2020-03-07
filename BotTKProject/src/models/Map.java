@@ -50,8 +50,8 @@ public class Map implements Serializable {
     }
 
 
-    public static void printBoard(Icons[][] board){
-        for(Icons[] icons : board){
+    public static void printBoard(){
+        for(Icons[] icons : getGrid()){
             for (Icons icon : icons){
                 if(icon == null){
                     System.out.printf("%-3s", Icons._);
@@ -64,8 +64,8 @@ public class Map implements Serializable {
         }
     }
 
-    public void setIcon(Icons[][] map, int row, int col){
-        map[row][col] = Icons.P;
+    public void setIcon(int row, int col, Icons icon){
+        getGrid()[row][col] = icon;
     }
 
     public static Icons[][] getGrid() {

@@ -3,10 +3,10 @@ package models;
 import java.io.Serializable;
 
 public class Weapon implements Serializable {
-    private final String name;
-    private final WeaponType damageType;
-    private final int damageRating;
-    private final int idealRange;
+    public final String name;
+    public final WeaponType damageType;
+    public final int damageRating;
+    public final int idealRange;
 
     public Weapon(String name, WeaponType damageType, int damageRating, int idealRange) {
         this.name = name;
@@ -14,4 +14,6 @@ public class Weapon implements Serializable {
         this.damageRating = damageRating;
         this.idealRange = idealRange;
     }
+
+
 }

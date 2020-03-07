@@ -17,6 +17,10 @@ public class GameController {
         players.add(player);
     }
 
+    public static ArrayList<Player> getPlayers(){
+        return players;
+    }
+
     public static void newMap(){
         map.randomMap();
     }
@@ -61,7 +65,88 @@ public class GameController {
     }
 
     public static void playGame(){
+        boolean player1IsAlive = true;
+        boolean player2IsAlive = true;
 
+        do{
+            map.printBoard();
+            if(isPlayer1Turn){
+                Player p = getPlayers().get(0);
+                takeHumanTurn(p.getRow(), p.getCol(), p);
+            }
+            else{
+                Player p = getPlayers().get(1);
+                if(p.isHuman){
+                    takeHumanTurn(p.getRow(), p.getCol(), p);
+                }
+                else{
+                    takeAITurn(p.getRow(), p.getCol(), p);
+                }
+            }
+
+        }while (player1IsAlive && player2IsAlive);
+
+
+    }
+
+    public static void takeHumanTurn(int row, int col, Player p){
+        int maxMoves = p.getStamina();
+        String[] playerOptions = evaluateOptions(row, col, p);
+//                {"Move Up", "Move Down", "Move Right", "Move Left", "End Turn"};
+        int move = 0;
+        do{
+            int userChoice = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            switch(userChoice){
+                case 1:
+                    if(map.checkValidSpace(row - 1, col)) {
+                        map.setIcon(row - 1, col, p.getIcon());
+                        map.setIcon(row, col, Icons._);
+                        move ++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 2:
+                    if(map.checkValidSpace(row + 1, col)) {
+                        map.setIcon(row + 1, col, p.getIcon());
+                        map.setIcon(row, col, Icons._);
+                        move++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 3:
+                    if(map.checkValidSpace(row, col - 1)) {
+                        map.setIcon(row, col - 1, p.getIcon());
+                        map.setIcon(row, col, Icons._);
+                        move++;
+                    } else {
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+                case 4:
+                    if(map.checkValidSpace(row, col +1)) {
+                        map.setIcon(row, col + 1, p.getIcon());
+                        map.setIcon(row, col, Icons._);
+                        move++;
+                    } else{
+                        System.out.println("That space is not a valid move.");
+                    }
+                    break;
+            }
+        } while(move <= maxMoves);
+        //somehow pass in the current instance of the board/map to call methods on?
+        //get the players dexterity to set movement limit
+        //player can move in any direction as long as that space is an _
+        //Player moves by being prompted for up, down, left, or right
+        //or figure out how to bind arrow key strokes to up down left right
+        //Player turn ends when they run out of moves or select end turn
+        //Make sure board dynamically updates itself after every change instead of reprinting entire console
+
+    }
+
+    private static String[] evaluateOptions(int row, int col, Player p) {
+        
     }
 
     public static boolean flipTheCoin(){
@@ -162,10 +247,10 @@ public class GameController {
 
     public static Player createWizard(String name){
         Armor armor;
-        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
-        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
-        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
-        Spell[] spells = {fireBallSpell, healingSpell, shieldSpell};
+        Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
+        Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
+        Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
+        Spell[] spells = {fireBall, heal, shield};
         String[] armorTypes = {"Gambeson: type: padded, rating: 3", "Cloak: type: padded, rating: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
@@ -184,57 +269,6 @@ public class GameController {
         return wizard;
     }
 
-    public void takeHumanTurn(Icons[][] map, int row, int col, Player p){
-        //int playerPosition = map[row][col];
-        int maxMoves = p.getDexterity();
-        String[] playerOptions = {"Move Up", "Move Down", "Move Right", "Move Left", "End Turn"};
-        int move = 0;
-        do{
-            int userChoice = ConsoleIO.promptForMenuSelection(playerOptions, true);
-            switch(userChoice){
-                case 1:
-                    if(map.checkValidSpace(row - 1, col)) {
-                        map.setIcon(map, row - 1, col);
-                        move ++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 2:
-                    if(map.checkValidSpace(row + 1, col)) {
-                        map.setIcon(map, row + 1, col);
-                        move++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 3:
-                    if(map.checkValidSpace(row, col - 1)) {
-                        map.setIcon(map, row, col - 1);
-                        move++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 4:
-                    if(map.checkValidSpace(row, col +1)) {
-                        map.setIcon(map, row, col + 1);
-                        move++;
-                    } else{
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-            }
-        } while(move <= maxMoves);
-        //somehow pass in the current instance of the board/map to call methods on?
-        //get the players dexterity to set movement limit
-        //player can move in any direction as long as that space is an _
-        //Player moves by being prompted for up, down, left, or right
-        //or figure out how to bind arrow key strokes to up down left right
-        //Player turn ends when they run out of moves or select end turn
-        //Make sure board dynamically updates itself after every change instead of reprinting entire console
-
-    }
 
     public static void saveGame(){
         game.setSavedMap(map);
