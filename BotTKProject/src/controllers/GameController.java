@@ -156,6 +156,9 @@ public class GameController {
         if(map.checkValidSpace(row, col - 1)) {
             optionsList.add("Move left");
         }
+        if(map.checkValidSpace(row, col + 1)) {
+            optionsList.add("Move right");
+        }
 
 
         }
