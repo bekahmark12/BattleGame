@@ -33,7 +33,7 @@ public class AIPlayer {
                 generateRandomWarrior();
                 break;
             case 2:
-                generateRandomWizard();
+//                generateRandomWizard();
                 break;
         }
         return player;
@@ -134,15 +134,15 @@ public class AIPlayer {
         return AIWarrior;
     }
 
-    public Player generateRandomWizard(){
-        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
-        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
-        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
-        Spell[] spells = {fireBallSpell, healingSpell, shieldSpell};
-        randName = generateRandomName();
-        randArmor = generateRandWizardArmor();
-
-        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
-        return AIWizard;
-    }
+//    public Player generateRandomWizard(){
+//        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
+//        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
+//        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
+//        Spell[] spells = {fireBallSpell, healingSpell, shieldSpell};
+//        randName = generateRandomName();
+//        randArmor = generateRandWizardArmor();
+//
+//        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
+//        return AIWizard;
+//    }
 }

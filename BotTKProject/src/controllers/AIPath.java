@@ -56,7 +56,7 @@ public class AIPath {
                 depthFirstSearch(map, row, col + 1, visited); //go down
                 depthFirstSearch(map, row, col - 1, visited); //go up
             }
-
+        return new Point();
         }
 
 

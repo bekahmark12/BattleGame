@@ -22,7 +22,7 @@ public class GameController {
     }
 
     public static void newMap(){
-        map.randomMap();
+        map.randomMap(players);
     }
 
     public static void run(){
@@ -46,7 +46,6 @@ public class GameController {
 
     public static void startGame() {
         players = new ArrayList<>();
-        newMap();
         isPlayer1Turn = flipTheCoin();
         String[] gameTypes = {"1 Player", "2 Player"};
         int selection = ConsoleIO.promptForMenuSelection(gameTypes, false);
@@ -54,11 +53,13 @@ public class GameController {
             case 1:
                 makePlayer();
 //                makeAI();
+                newMap();
                 playGame();
                 break;
             case 2:
                 makePlayer();
                 makePlayer();
+                newMap();
                 playGame();
         }
 
@@ -69,10 +70,10 @@ public class GameController {
         boolean player2IsAlive = true;
 
         do{
-            map.printBoard();
             if(isPlayer1Turn){
                 Player p = getPlayers().get(0);
                 takeHumanTurn(p.getRow(), p.getCol(), p);
+                isPlayer1Turn = !isPlayer1Turn;
             }
             else{
                 Player p = getPlayers().get(1);
@@ -80,8 +81,9 @@ public class GameController {
                     takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-                    takeAITurn(p.getRow(), p.getCol(), p);
+//                    takeAITurn(p.getRow(), p.getCol(), p);
                 }
+                isPlayer1Turn = !isPlayer1Turn;
             }
 
         }while (player1IsAlive && player2IsAlive);
@@ -90,51 +92,45 @@ public class GameController {
     }
 
     public static void takeHumanTurn(int row, int col, Player p){
-        int maxMoves = p.getStamina();
-        String[] playerOptions = evaluateOptions(row, col, p);
-//                {"Move Up", "Move Down", "Move Right", "Move Left", "End Turn"};
-        int move = 0;
+        int currentStamina = p.getStamina();
         do{
-            int userChoice = ConsoleIO.promptForMenuSelection(playerOptions, true);
-            switch(userChoice){
-                case 1:
-                    if(map.checkValidSpace(row - 1, col)) {
-                        map.setIcon(row - 1, col, p.getIcon());
-                        map.setIcon(row, col, Icons._);
-                        move ++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 2:
-                    if(map.checkValidSpace(row + 1, col)) {
-                        map.setIcon(row + 1, col, p.getIcon());
-                        map.setIcon(row, col, Icons._);
-                        move++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 3:
-                    if(map.checkValidSpace(row, col - 1)) {
-                        map.setIcon(row, col - 1, p.getIcon());
-                        map.setIcon(row, col, Icons._);
-                        move++;
-                    } else {
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
-                case 4:
-                    if(map.checkValidSpace(row, col +1)) {
-                        map.setIcon(row, col + 1, p.getIcon());
-                        map.setIcon(row, col, Icons._);
-                        move++;
-                    } else{
-                        System.out.println("That space is not a valid move.");
-                    }
-                    break;
+            map.printBoard();
+            ConsoleIO.printString(p.getName() + ", you have " + currentStamina + " stamina left");
+            String[] playerOptions = evaluateOptions(row, col, p, currentStamina);
+            int selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
+                map.setIcon(p.getRow(), p.getCol(), Icons._);
+                p.setRow(p.getRow() - 1);
+                row--;
+                map.setIcon(p.getRow(), p.getCol(), p.getIcon());
+                currentStamina--;
             }
-        } while(move <= maxMoves);
+            else if(playerOptions[selection - 1].equalsIgnoreCase("move down")){
+                map.setIcon(p.getRow(), p.getCol(), Icons._);
+                p.setRow(p.getRow() + 1);
+                row++;
+                map.setIcon(p.getRow(), p.getCol(), p.getIcon());
+                currentStamina--;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("move left")){
+                map.setIcon(p.getRow(), p.getCol(), Icons._);
+                p.setCol(p.getCol() - 1);
+                col--;
+                map.setIcon(p.getRow(), p.getCol(), p.getIcon());
+                currentStamina--;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("move right")){
+                map.setIcon(p.getRow(), p.getCol(), Icons._);
+                p.setCol(p.getCol() + 1);
+                col++;
+                map.setIcon(p.getRow(), p.getCol(), p.getIcon());
+                currentStamina--;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("Cast Fireball at enemy (2 stamina)")){
+
+                currentStamina -= 2;
+            }
+        } while(currentStamina > 0);
         //somehow pass in the current instance of the board/map to call methods on?
         //get the players dexterity to set movement limit
         //player can move in any direction as long as that space is an _
@@ -145,12 +141,12 @@ public class GameController {
 
     }
 
-    private static String[] evaluateOptions(int row, int col, Player p) {
+    private static String[] evaluateOptions(int row, int col, Player p, int stamina) {
         ArrayList<String> optionsList = new ArrayList<>();
-        if(map.checkValidSpace(row + 1, col)) {
+        if(map.checkValidSpace(row - 1, col)) {
             optionsList.add("Move up");
         }
-        if(map.checkValidSpace(row - 1, col)) {
+        if(map.checkValidSpace(row + 1, col)) {
             optionsList.add("Move down");
         }
         if(map.checkValidSpace(row, col - 1)) {
@@ -159,9 +155,45 @@ public class GameController {
         if(map.checkValidSpace(row, col + 1)) {
             optionsList.add("Move right");
         }
-
-
+        int distance = calculateDistance();
+        if(p.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            if(distance >= 3 && stamina >= 2){
+                optionsList.add("Cast Fireball at enemy (2 stamina)");
+            }
+            if(p.getHealth() < p.getMaxHealth() && stamina >= 5){
+                optionsList.add("Cast Heal on self (5 stamina)");
+            }
+            if(stamina >= 3) {
+                optionsList.add("Cast Shield on self(3 stamina)");
+            }
         }
+        else if(p.getClass().getSimpleName().equalsIgnoreCase("ranger")){
+            int range = ((Ranger) p).getWeapon().idealRange;
+            if(range >= distance && stamina >= 2){
+                optionsList.add("Attack enemy (2 stamina)");
+            }
+        }
+        else{
+            int range = ((Warrior) p).getWeapon().idealRange;
+            if(range >= distance && stamina >= 2){
+                optionsList.add("Attack enemy (2 stamina)");
+            }
+        }
+        String[] options = new String[optionsList.size()];
+        for(int i = 0; i < optionsList.size(); i++){
+            options[i] = optionsList.get(i);
+        }
+        return options;
+        }
+
+    private static int calculateDistance() {
+        Player one = players.get(0);
+        Player two = players.get(1);
+        int x = one.getCol() - two.getCol();
+        int y = one.getRow() - two.getRow();
+        int distance = (int) Math.sqrt((x * x) + (y * y));
+        return distance;
+    }
 
     public static boolean flipTheCoin(){
         Random rng = new Random();
@@ -220,7 +252,7 @@ public class GameController {
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
-        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.O, true);
+        ranger = new Ranger(name, 25, 7, 4, 12, 6, 15, weapon, armor, Icons.P, true);
         return ranger;
     }
 
@@ -261,10 +293,13 @@ public class GameController {
 
     public static Player createWizard(String name){
         Armor armor;
+        ArrayList<Spell> spells = new ArrayList<>();
         Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
         Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
         Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
-        Spell[] spells = {fireBall, heal, shield};
+        spells.add(fireBall);
+        spells.add(heal);
+        spells.add(shield);
         String[] armorTypes = {"Gambeson: type: padded, rating: 3", "Cloak: type: padded, rating: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
@@ -279,7 +314,7 @@ public class GameController {
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
         }
 
-        Player wizard = new Wizard(name, 40, 20, 15, 12, 25, 5, spells, Icons.T, armor, true);
+        Player wizard = new Wizard(name, 20, 6, 4, 8, 10, 9, spells, Icons.P, armor, true);
         return wizard;
     }
 
