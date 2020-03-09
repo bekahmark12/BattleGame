@@ -10,7 +10,7 @@ import java.util.Random;
 public class GameController {
     private static Map map = new Map();
     private static ArrayList<Player> players  = new ArrayList();
-    private static Game game;
+    private static Game game = new Game();
     private static boolean isPlayer1Turn;
 
     public static void addPlayer(Player player){
@@ -326,7 +326,7 @@ public class GameController {
             oos.writeObject(game);
             oos.close();
             fout.close();
-            ConsoleIO.printString("Success");
+            ConsoleIO.printString("Game Saved");
         }catch (IOException ioe){}
 
     }
