@@ -98,7 +98,10 @@ public class GameController {
             ConsoleIO.printString(p.getName() + ", you have " + currentStamina + " stamina left");
             String[] playerOptions = evaluateOptions(row, col, p, currentStamina);
             int selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
-            if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
+            if(selection == 0){
+                saveGame();
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
                 map.setIcon(p.getRow(), p.getCol(), Icons._);
                 p.setRow(p.getRow() - 1);
                 row--;
