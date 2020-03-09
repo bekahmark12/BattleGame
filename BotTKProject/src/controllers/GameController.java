@@ -317,7 +317,7 @@ public class GameController {
 
 
     public static void saveGame(){
-        game.setSavedMap(map);
+        game.setSavedMap(map.getGrid());
         game.setSavedPlayers(players);
         game.setSavedIsPlayer1Turn(isPlayer1Turn);
         try{
@@ -339,7 +339,8 @@ public class GameController {
             fileIn.close();
             in.close();
         }catch (IOException | ClassNotFoundException e){}
-        map = game.getSavedMap();
+        Icons[][] icons = game.getSavedMap();
+        map.setGrid(icons);
         players = game.getSavedPlayers();
         isPlayer1Turn = game.savedIsPlayer1Turn();
     }

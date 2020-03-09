@@ -96,6 +96,10 @@ public class Map implements Serializable {
         grid[row][col] = icon;
     }
 
+    public static void setGrid(Icons[][] grid) {
+        Map.grid = grid;
+    }
+
     public static Icons[][] getGrid() {
         return grid;
     }

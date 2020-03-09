@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
-    private Map savedMap = new Map();
+    private Icons[][] savedMap = new Icons[12][24];
     private ArrayList<Player> savedPlayers  = new ArrayList();
     private boolean savedIsPlayer1Turn;
 
-    public void setSavedMap(Map map){
-        savedMap = map;
+    public void setSavedMap(Icons[][] icons){
+        savedMap = icons;
     }
 
     public void setSavedPlayers(ArrayList<Player> players){
@@ -20,7 +20,7 @@ public class Game implements Serializable {
         savedIsPlayer1Turn = isPlayer1Turn;
     }
 
-    public Map getSavedMap() {
+    public Icons[][] getSavedMap() {
         return savedMap;
     }
 
