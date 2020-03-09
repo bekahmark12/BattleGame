@@ -249,6 +249,7 @@ public class GameController {
                 break;
             case 2:
                 weapon = new Weapon( "Longsword", WeaponType.SLASH, 5, 1);
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
         }
