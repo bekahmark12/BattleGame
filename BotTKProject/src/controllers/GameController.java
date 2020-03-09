@@ -18,7 +18,7 @@ import java.util.Random;
 public class GameController {
     private static Map map = new Map();
     private static ArrayList<Player> players  = new ArrayList();
-    private static Game game;
+    private static Game game = new Game();
     private static boolean isPlayer1Turn;
 
     public static void addPlayer(Player player){
@@ -30,6 +30,7 @@ public class GameController {
     }
 
     public static void newMap(){
+        map = new Map();
         map.randomMap(players);
     }
 
@@ -76,37 +77,47 @@ public class GameController {
     public static void playGame(){
         boolean player1IsAlive = true;
         boolean player2IsAlive = true;
+        boolean hasQuit = false;
 
         do{
             if(isPlayer1Turn){
                 Player p = getPlayers().get(0);
-                takeHumanTurn(p.getRow(), p.getCol(), p);
-                isPlayer1Turn = !isPlayer1Turn;
+                hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
+
             }
             else{
                 Player p = getPlayers().get(1);
                 if(p.isHuman){
-                    takeHumanTurn(p.getRow(), p.getCol(), p);
+                    hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-//                    takeAITurn(p.getRow(), p.getCol(), p);
+//                   hasQuit = takeAITurn(p.getRow(), p.getCol(), p);
                 }
+
+            }
+            if(!hasQuit) {
                 isPlayer1Turn = !isPlayer1Turn;
             }
 
-        }while (player1IsAlive && player2IsAlive);
+        }while (player1IsAlive && player2IsAlive && !hasQuit);
 
 
     }
 
-    public static void takeHumanTurn(int row, int col, Player p){
+    public static boolean takeHumanTurn(int row, int col, Player p){
         int currentStamina = p.getStamina();
+        int selection = -1;
+        boolean hasQuit = false;
         do{
             map.printBoard();
             ConsoleIO.printString(p.getName() + ", you have " + currentStamina + " stamina left");
             String[] playerOptions = evaluateOptions(row, col, p, currentStamina);
-            int selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
-            if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
+            selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            if(selection == 0){
+                saveGame();
+                hasQuit = true;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
                 map.setIcon(p.getRow(), p.getCol(), Icons._);
                 p.setRow(p.getRow() - 1);
                 row--;
@@ -138,7 +149,8 @@ public class GameController {
 
                 currentStamina -= 2;
             }
-        } while(currentStamina > 0);
+        } while(currentStamina > 0 && selection != 0);
+        return hasQuit;
     }
 
     private static String[] evaluateOptions(int row, int col, Player p, int stamina) {
@@ -319,9 +331,8 @@ public class GameController {
         return wizard;
     }
 
-
     public static void saveGame(){
-        game.setSavedMap(map);
+        game.setSavedMap(map.getGrid());
         game.setSavedPlayers(players);
         game.setSavedIsPlayer1Turn(isPlayer1Turn);
         try{
@@ -330,7 +341,7 @@ public class GameController {
             oos.writeObject(game);
             oos.close();
             fout.close();
-            ConsoleIO.printString("Success");
+            ConsoleIO.printString("Game Saved");
         }catch (IOException ioe){}
 
     }
@@ -343,10 +354,10 @@ public class GameController {
             fileIn.close();
             in.close();
         }catch (IOException | ClassNotFoundException e){}
-        map = game.getSavedMap();
+        Icons[][] icons = game.getSavedMap();
+        map.setGrid(icons);
         players = game.getSavedPlayers();
         isPlayer1Turn = game.savedIsPlayer1Turn();
     }
-
 
 }

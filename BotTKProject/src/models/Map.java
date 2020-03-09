@@ -13,6 +13,7 @@ public class Map implements Serializable {
 
 
     public static Icons[][] randomMap(ArrayList<Player> players){
+        grid = new Icons[12][24];
         int randomP2;
         int randomP1;
         Player p1 = players.get(0);
@@ -31,20 +32,7 @@ public class Map implements Serializable {
                 }
             }
         }
-        do{
-            randomP2 = rng.nextInt(12);
-        }while (!Map.checkValidSpace(randomP2, 23));
-        grid[randomP2][23] = p2.getIcon();
-        p2.setCol(23);
-        p2.setRow(randomP2);
-
-        do{
-            randomP1 = rng.nextInt(12);
-        }while (!Map.checkValidSpace(randomP1, 0));
-        grid[randomP1][0] = p1.getIcon();
-        p1.setCol(0);
-        p1.setRow(randomP1);
-
+        placePlayer(players);
 
         return grid;
     }
@@ -75,8 +63,45 @@ public class Map implements Serializable {
         }
     }
 
+    public static void placePlayer(ArrayList<Player> players){
+        int randomP = 0;
+        boolean validSpaceP = true;
+        for(int i = 0; i < players.size(); i++){
+            Player player = players.get(i);
+            int pCol = -1;
+            do{
+                if(i == 0){
+                    pCol = 0;
+                    randomP = rng.nextInt(12);
+                    if(!Map.checkValidSpace(randomP, pCol)){
+                        validSpaceP = false;
+                    }else if(Map.checkValidSpace(randomP + 1, pCol) || Map.checkValidSpace(randomP + 1, pCol) || Map.checkValidSpace(randomP, pCol)){
+                        validSpaceP = false;
+                    }
+                }
+                else if(i == 1){
+                    pCol = 23;
+                    randomP = rng.nextInt(12);
+                    if(!Map.checkValidSpace(randomP, pCol)){
+                        validSpaceP = false;
+                    }else if(!Map.checkValidSpace(randomP + 1, pCol) || !Map.checkValidSpace(randomP + 1, pCol) || !Map.checkValidSpace(randomP, pCol)){
+                        validSpaceP = false;
+                    }
+                }
+
+            }while (validSpaceP);
+            grid[randomP][pCol] = player.getIcon();
+            player.setCol(pCol);
+            player.setRow(randomP);
+        }
+    }
+
     public void setIcon(int row, int col, Icons icon){
         grid[row][col] = icon;
+    }
+
+    public static void setGrid(Icons[][] grid) {
+        Map.grid = grid;
     }
 
     public static Icons[][] getGrid() {
