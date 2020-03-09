@@ -2,11 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94db5242-e336-49ad-aa22-4b912854966c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/AIPathing.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/META-INF/BotTKProject.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/AIPath.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/AIPlayerGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/ArmorType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/ArmorType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Coordinate.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterUML.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterUML.uxf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Icons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/Icons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/RandomAINames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/RandomAINames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Ranger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/Ranger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/SpellType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/SpellType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Warrior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/Warrior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/WeaponType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/enums/WeaponType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/players/Wizard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +46,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -50,12 +67,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/ConsoleIO.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Homework/OOP" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="models.enums" />
+      <recent name="models.players" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ethan Wilson\OneDrive - Neumont College of Computer Science\Assignments\OOP\Battle-of-the-True-King\BotTKProject\src" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -73,18 +106,6 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -108,6 +129,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="958" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1583721174356">
@@ -178,14 +210,6 @@
           <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
           <line>193</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
-          <line>143</line>
-          <properties class="controllers.GameController" method="evaluateOptions">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

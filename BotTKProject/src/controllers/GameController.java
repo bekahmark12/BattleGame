@@ -2,6 +2,14 @@ package controllers;
 
 import lib.ConsoleIO;
 import models.*;
+import models.enums.ArmorType;
+import models.enums.Icons;
+import models.enums.SpellType;
+import models.enums.WeaponType;
+import models.players.Player;
+import models.players.Ranger;
+import models.players.Warrior;
+import models.players.Wizard;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -131,14 +139,6 @@ public class GameController {
                 currentStamina -= 2;
             }
         } while(currentStamina > 0);
-        //somehow pass in the current instance of the board/map to call methods on?
-        //get the players dexterity to set movement limit
-        //player can move in any direction as long as that space is an _
-        //Player moves by being prompted for up, down, left, or right
-        //or figure out how to bind arrow key strokes to up down left right
-        //Player turn ends when they run out of moves or select end turn
-        //Make sure board dynamically updates itself after every change instead of reprinting entire console
-
     }
 
     private static String[] evaluateOptions(int row, int col, Player p, int stamina) {

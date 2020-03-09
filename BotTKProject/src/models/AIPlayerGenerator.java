@@ -1,10 +1,16 @@
 package models;
 
+import models.enums.*;
+import models.players.Player;
+import models.players.Ranger;
+import models.players.Warrior;
+import models.players.Wizard;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AIPlayer {
+public class AIPlayerGenerator {
     private String randName;
     private Armor randArmor;
     private Weapon randWeapon;
@@ -134,15 +140,15 @@ public class AIPlayer {
         return AIWarrior;
     }
 
-//    public Player generateRandomWizard(){
-//        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
-//        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
-//        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
-//        Spell[] spells = {fireBallSpell, healingSpell, shieldSpell};
-//        randName = generateRandomName();
-//        randArmor = generateRandWizardArmor();
-//
-//        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
-//        return AIWizard;
-//    }
+    public Player generateRandomWizard(){
+        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
+        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
+        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
+        Spell[]spells = {fireBallSpell, healingSpell, shieldSpell};
+        randName = generateRandomName();
+        randArmor = generateRandWizardArmor();
+
+        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
+        return AIWizard;
+    }
 }
