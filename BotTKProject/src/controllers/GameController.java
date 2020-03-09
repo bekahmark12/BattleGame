@@ -22,6 +22,7 @@ public class GameController {
     }
 
     public static void newMap(){
+        map = new Map();
         map.randomMap(players);
     }
 
