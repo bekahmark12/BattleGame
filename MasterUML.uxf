@@ -46,29 +46,33 @@ fg=blue</panel_attributes>
 _- map : Map_
 _- players : ArrayList&lt;Player&gt;_
 _- game : Game_
+_- isPlayer1Turn : boolean_
 --
 _+ addPlayer(player : Player) : void_
 _+ newMap() : void_
+_+ getPlayers() : ArrayList&lt;Player&gt;
 
 _+ run() : void_
 _+ mainMenu() : void_
 _+ startGame() : void_
+_+ takeHumanTurn(row : int, col : int, p : Player) : void_
+_+ evaluateOptions(row : int, col : int, p : Player) : Stringp[ ]_
+_+ flipTheCoin() : boolean
 _+ makePlayer() : void_
 _+ createRanger() : Player_
 _+ createWarrior() : Player_
 _+ createWizard() : Player_
 _+ playGame(mode : int) : void_
-_+ determineMoves(player : Player) : String[ ]_
+_+ saveGame() : void_
+_+ loadGame() : void_
+
 _+ movePlayer(player : Player, row : int, col : int) : void_
-
-
 _+ combat(attacker : Player, defender : Player) : boolean_
 _+ hitChance(attacker : Player, defender : Player) : float_
 _+ calculateRange(attacker : Player, defender : Player) : int_
 _+ damageMin(attacker : Player, defender : Player) : int_
 _+ damageMax(attacker : Player, defender : Player) : int_
-_+ saveGame() : void_
-_+ loadGame() : void_
+
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -193,18 +197,18 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>904</x>
-      <y>976</y>
+      <y>1016</y>
       <w>168</w>
-      <h>72</h>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;190.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;190.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>664</x>
-      <y>912</y>
+      <y>952</y>
       <w>248</w>
       <h>136</h>
     </coordinates>
@@ -470,10 +474,10 @@ layer=1</panel_attributes>
       <x>536</x>
       <y>808</y>
       <w>144</w>
-      <h>152</h>
+      <h>192</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;170.0</additional_attributes>
+    <additional_attributes>10.0;10.0;160.0;220.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -593,5 +597,38 @@ or healing spell will do. Pick numfor now.
 
 Types: Fireball, thorn, heal</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>712</x>
+      <y>792</y>
+      <w>304</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+- savedMap : Map
+- savedPlayers : ArrayList&lt;Player&gt;
+- savedIsPlayer1Turn : boolean
+--
++ setSavedMap(map : Map) : void
++ setSavedPlayers(players : ArrayList&lt;Player&gt;) : void
++ setSavedIsPlayer1Turn(isPlayer1Turn : boolean) : void
++ getSavedMap() : Map
++ getSavedPlayers() : ArrayList&lt;Player&gt;
++ savedIsPlayer1Turn() : boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>792</y>
+      <w>184</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;210.0;100.0</additional_attributes>
   </element>
 </diagram>

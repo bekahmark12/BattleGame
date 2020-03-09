@@ -287,6 +287,7 @@ public class GameController {
     public static void saveGame(){
         game.setSavedMap(map);
         game.setSavedPlayers(players);
+        game.setSavedIsPlayer1Turn(isPlayer1Turn);
         try{
             FileOutputStream fout = new FileOutputStream("Save.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -306,6 +307,9 @@ public class GameController {
             fileIn.close();
             in.close();
         }catch (IOException | ClassNotFoundException e){}
+        map = game.getSavedMap();
+        players = game.getSavedPlayers();
+        isPlayer1Turn = game.savedIsPlayer1Turn();
     }
 
 

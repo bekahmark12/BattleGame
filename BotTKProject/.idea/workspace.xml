@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94db5242-e336-49ad-aa22-4b912854966c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/AIPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MasterUML.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterUML.uxf" afterDir="false" />
     </list>
@@ -96,6 +96,8 @@
       <workItem from="1583441329349" duration="49000" />
       <workItem from="1583442450089" duration="3572000" />
       <workItem from="1583527531536" duration="2000" />
+      <workItem from="1583698925005" duration="241000" />
+      <workItem from="1583720102576" duration="1598000" />
     </task>
     <servers />
   </component>
@@ -103,10 +105,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="958" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1583185553637">
+    <state x="958" y="129" key="#com.intellij.ide.util.MemberChooser" timestamp="1583721174356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="958" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583185553637" />
+    <state x="958" y="129" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583721174356" />
     <state x="1002" y="302" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1583184941178">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
