@@ -93,11 +93,12 @@ public class GameController {
 
     public static void takeHumanTurn(int row, int col, Player p){
         int currentStamina = p.getStamina();
+        int selection = -1;
         do{
             map.printBoard();
             ConsoleIO.printString(p.getName() + ", you have " + currentStamina + " stamina left");
             String[] playerOptions = evaluateOptions(row, col, p, currentStamina);
-            int selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
             if(selection == 0){
                 saveGame();
             }
@@ -133,15 +134,7 @@ public class GameController {
 
                 currentStamina -= 2;
             }
-        } while(currentStamina > 0);
-        //somehow pass in the current instance of the board/map to call methods on?
-        //get the players dexterity to set movement limit
-        //player can move in any direction as long as that space is an _
-        //Player moves by being prompted for up, down, left, or right
-        //or figure out how to bind arrow key strokes to up down left right
-        //Player turn ends when they run out of moves or select end turn
-        //Make sure board dynamically updates itself after every change instead of reprinting entire console
-
+        } while(currentStamina > 0 && selection != 0);
     }
 
     private static String[] evaluateOptions(int row, int col, Player p, int stamina) {
