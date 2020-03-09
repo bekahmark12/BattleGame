@@ -10,6 +10,7 @@ public class Map implements Serializable {
 
 
     public static Icons[][] randomMap(ArrayList<Player> players){
+        grid = new Icons[12][24];
         int randomP2;
         int randomP1;
         Player p1 = players.get(0);
