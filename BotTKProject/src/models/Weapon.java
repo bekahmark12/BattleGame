@@ -1,5 +1,7 @@
 package models;
 
+import models.enums.WeaponType;
+
 import java.io.Serializable;
 
 public class Weapon implements Serializable {

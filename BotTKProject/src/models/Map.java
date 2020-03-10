@@ -1,5 +1,8 @@
 package models;
 
+import models.enums.Icons;
+import models.players.Player;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,6 +13,7 @@ public class Map implements Serializable {
 
 
     public static Icons[][] randomMap(ArrayList<Player> players){
+        grid = new Icons[12][24];
         int randomP2;
         int randomP1;
         Player p1 = players.get(0);
@@ -92,7 +96,7 @@ public class Map implements Serializable {
         }
     }
 
-    public void setIcon(int row, int col, Icons icon){
+    public static void setIcon(int row, int col, Icons icon){
         grid[row][col] = icon;
     }
 

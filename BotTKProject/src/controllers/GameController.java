@@ -2,6 +2,14 @@ package controllers;
 
 import lib.ConsoleIO;
 import models.*;
+import models.enums.ArmorType;
+import models.enums.Icons;
+import models.enums.SpellType;
+import models.enums.WeaponType;
+import models.players.Player;
+import models.players.Ranger;
+import models.players.Warrior;
+import models.players.Wizard;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -351,7 +359,6 @@ public class GameController {
         return wizard;
     }
 
-
     public static void saveGame(){
         game.setSavedMap(map.getGrid());
         game.setSavedPlayers(players);
@@ -380,6 +387,5 @@ public class GameController {
         players = game.getSavedPlayers();
         isPlayer1Turn = game.savedIsPlayer1Turn();
     }
-
 
 }
