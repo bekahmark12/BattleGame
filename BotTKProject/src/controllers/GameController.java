@@ -57,8 +57,7 @@ public class GameController {
         switch(selection){
             case 1:
                 makePlayer(Icons.A);
-//                makeAI(Icons.B);
-
+                makeAIPlayer(Icons.B);
                 newMap();
                 playGame();
                 break;
@@ -94,7 +93,7 @@ public class GameController {
                     hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-                   hasQuit = takeAITurn(p.getRow(), p.getCol(), p);
+                    takeAITurn(getPlayers().get(1), getPlayers().get(0));
                 }
 
             }
@@ -107,8 +106,8 @@ public class GameController {
 
     }
 
-    public static void takeAITurn(Icons[][]map, Player AIPlayer, Player opponent){
-        AIController.AIMoveTowardsOpponent(map, AIPlayer);
+    public static void takeAITurn(Player AIPlayer, Player opponent){
+        AIController.AIMoveTowardsOpponent(map.getGrid(), AIPlayer);
         int distance = calculateDistance();
         int attackRange = 0;
         if(AIPlayer instanceof Warrior){
@@ -276,6 +275,10 @@ public class GameController {
                 addPlayer(createWizard(name, icon));
                 break;
         }
+    }
+
+    public static void makeAIPlayer(Icons icon){
+        AIGenerator.generateAIPlayer();
     }
 
     public static Player createRanger(String name, Icons icon){
