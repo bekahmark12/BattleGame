@@ -12,6 +12,8 @@ public class GameController {
     private static ArrayList<Player> players  = new ArrayList();
     private static Game game = new Game();
     private static boolean isPlayer1Turn;
+    public static AIPlayerGenerator AIGenerator = new AIPlayerGenerator();
+    public static AIPathing AIController = new AIPathing();
 
     public static void addPlayer(Player player){
         players.add(player);
@@ -55,7 +57,12 @@ public class GameController {
         switch(selection){
             case 1:
                 makePlayer(Icons.A);
+<<<<<<< HEAD
 //                makeAI(Icons.B);
+
+=======
+                makeAIPlayer(Icons.B);
+>>>>>>> ab4eec58e8ac5f6559fa0b59c4322e5d80a605b3
                 newMap();
                 playGame();
                 break;
@@ -91,7 +98,8 @@ public class GameController {
                     hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-//                   hasQuit = takeAITurn(p.getRow(), p.getCol(), p);
+
+                    takeAITurn(getPlayers().get(1), getPlayers().get(0));
                 }
 
             }
@@ -103,6 +111,22 @@ public class GameController {
 
 
     }
+
+
+    public static void takeAITurn(Player AIPlayer, Player opponent){
+        AIController.AIMoveTowardsOpponent(map.getGrid(), AIPlayer);
+        int distance = calculateDistance();
+        int attackRange = 0;
+        if(AIPlayer instanceof Warrior){
+            attackRange = ((Warrior) AIPlayer).getWeapon().getIdealRange();
+        } else if(AIPlayer instanceof Ranger){
+            attackRange = ((Ranger) AIPlayer).getWeapon().getIdealRange();
+        }
+        if(distance <= attackRange){
+            combat(AIPlayer, opponent);
+        }
+    }
+
 
     public static boolean takeHumanTurn(int row, int col, Player p){
         int currentStamina = p.getStamina();
@@ -166,6 +190,22 @@ public class GameController {
         boolean hasHit = ((rng.nextInt(100) + 1) >= hitChance);
         System.out.println(hasHit);
         ConsoleIO.delay(3);
+        int damage = calculateDamage(attacker, defender);
+        System.out.println(damage);
+    }
+
+    private static int calculateDamage(Player attacker, Player defender) {
+        int damage = 0;
+        if(attacker.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            damage = ((Wizard)attacker).getSpells().get(0).getAffectRating();
+            if(defender.getArmor().armorType == ArmorType.PADDED){
+                damage = (int)(damage * 1.5f);
+            }
+            else if(defender.getArmor().armorType == ArmorType.PLATE){
+                damage = (int)(damage * .75f);
+            }
+        }
+        return damage;
     }
 
     private static int hitChance(Player attacker, Player defender) {
@@ -258,6 +298,10 @@ public class GameController {
                 addPlayer(createWizard(name, icon));
                 break;
         }
+    }
+
+    public static void makeAIPlayer(Icons icon){
+        AIGenerator.generateAIPlayer();
     }
 
     public static Player createRanger(String name, Icons icon){

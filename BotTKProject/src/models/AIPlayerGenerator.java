@@ -24,16 +24,13 @@ public class AIPlayerGenerator {
 
 
     public Player generateAIPlayer(){
-        int possiblePlayers = rand.nextInt(3);
+        int possiblePlayers = rand.nextInt(2);
         switch(possiblePlayers){
             case 0:
                 generateRandomRanger();
                 break;
             case 1:
                 generateRandomWarrior();
-                break;
-            case 2:
-//                generateRandomWizard();
                 break;
         }
         return player;

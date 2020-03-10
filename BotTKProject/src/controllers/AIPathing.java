@@ -124,7 +124,7 @@ public class AIPathing {
 //        }
 
 
-    public void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer, Player opponent) {
+    public void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer) {
         int currentRow = AIPlayer.getRow();
         int currentCol = AIPlayer.getCol();
         Point AICurrentLocation = new Point(currentRow, currentCol);

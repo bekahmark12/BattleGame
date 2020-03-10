@@ -24,7 +24,7 @@ public class Wizard extends Player implements Serializable {
     }
 
     public void setSpells(ArrayList<Spell> spells) {
-        this.spells = getSpells();
+        this.spells = spells;
     }
 
     @Override
