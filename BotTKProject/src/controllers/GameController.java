@@ -40,24 +40,26 @@ public class GameController {
 
     public static void mainMenu(){
         String[] options = {"Start a New Game", "Load a Game"};
-        int selection = ConsoleIO.promptForMenuSelection(options, true);
-
-        switch(selection){
-            case 1:
-                startGame();
-                break;
-            case 2:
-                loadGame();
-                playGame();
-                break;
-        }
+        int selection = -1;
+        do {
+            selection = ConsoleIO.promptForMenuSelection(options, true, "Exit app");
+            switch (selection) {
+                case 1:
+                    startGame();
+                    break;
+                case 2:
+                    loadGame();
+                    playGame();
+                    break;
+            }
+        }while (selection != 0);
     }
 
     public static void startGame() {
         players = new ArrayList<>();
         isPlayer1Turn = flipTheCoin();
         String[] gameTypes = {"1 Player", "2 Player"};
-        int selection = ConsoleIO.promptForMenuSelection(gameTypes, false);
+        int selection = ConsoleIO.promptForMenuSelection(gameTypes, false, null);
         switch(selection){
             case 1:
                 makePlayer();
@@ -110,9 +112,10 @@ public class GameController {
         boolean hasQuit = false;
         do{
             map.printBoard();
+            ConsoleIO.delay(2);
             ConsoleIO.printString(p.getName() + ", you have " + currentStamina + " stamina left");
             String[] playerOptions = evaluateOptions(row, col, p, currentStamina);
-            selection = ConsoleIO.promptForMenuSelection(playerOptions, true);
+            selection = ConsoleIO.promptForMenuSelection(playerOptions, true, "Save and exit");
             if(selection == 0){
                 saveGame();
                 hasQuit = true;
@@ -146,11 +149,36 @@ public class GameController {
                 currentStamina--;
             }
             else if(playerOptions[selection - 1].equalsIgnoreCase("Cast Fireball at enemy (2 stamina)")){
-
+                if(isPlayer1Turn){
+                    combat(p, getPlayers().get(1));
+                }
+                else{
+                    combat(getPlayers().get(1), p);
+                }
                 currentStamina -= 2;
             }
         } while(currentStamina > 0 && selection != 0);
         return hasQuit;
+    }
+
+    private static void combat(Player attacker, Player defender) {
+        int hitChance = hitChance(attacker, defender);
+        System.out.println(hitChance);
+        Random rng = new Random();
+        boolean hasHit = ((rng.nextInt(100) + 1) >= hitChance);
+        System.out.println(hasHit);
+        ConsoleIO.delay(3);
+    }
+
+    private static int hitChance(Player attacker, Player defender) {
+        int distance = calculateDistance();
+        int chance = 100;
+        if(attacker.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            chance -= (distance * 10);
+            chance -= (defender.getAgility() * 5);
+            chance += (attacker.getDexterity() * 4);
+        }
+        return chance;
     }
 
     private static String[] evaluateOptions(int row, int col, Player p, int stamina) {
@@ -169,7 +197,7 @@ public class GameController {
         }
         int distance = calculateDistance();
         if(p.getClass().getSimpleName().equalsIgnoreCase("wizard")){
-            if(distance >= 3 && stamina >= 2){
+            if(distance <= 3 && stamina >= 2){
                 optionsList.add("Cast Fireball at enemy (2 stamina)");
             }
             if(p.getHealth() < p.getMaxHealth() && stamina >= 5){
@@ -220,7 +248,7 @@ public class GameController {
     public static void makePlayer() {
         String name = ConsoleIO.promptForString("Enter a name for your character: ");
         String[] playerTypes = {"Ranger", "Warrior", "Wizard"};
-        int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false);
+        int selectPlayerType = ConsoleIO.promptForMenuSelection(playerTypes, false, null);
         switch(selectPlayerType){
             case 1:
                 addPlayer(createRanger(name));
@@ -240,10 +268,10 @@ public class GameController {
         Weapon weapon;
 
         String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Gambeson: type: padded, rating: 3"};
-        String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 4", "Longsword: type : slash, rating: 5, ideal range: 1"};
+        String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 3", "Longsword: type : slash, rating: 5, ideal range: 1"};
         ConsoleIO.printString("Please select your armor: ");
-        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false);
-        int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false);
+        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
+        int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false, null);
         switch(armorSelection){
             case 1:
                 armor = new Armor("Chain Mail", ArmorType.MAIL, 5);
@@ -257,7 +285,7 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 6, 4);
+                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 6, 3);
                 break;
             case 2:
                 weapon = new Weapon( "Longsword", WeaponType.SLASH, 5, 1);
@@ -276,8 +304,8 @@ public class GameController {
         String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Plate: type: steel, rating: 5"};
         String[] weaponTypes = {"Sword", "Spear"};
         ConsoleIO.printString("Please select your armor: ");
-        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false);
-        int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false);
+        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
+        int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false, null);
         switch(armorSelection){
             case 1:
                 armor = new Armor("Chain Mail", ArmorType.MAIL, 5);
@@ -315,7 +343,7 @@ public class GameController {
         spells.add(shield);
         String[] armorTypes = {"Gambeson: type: padded, rating: 3", "Cloak: type: padded, rating: 1"};
         ConsoleIO.printString("Please select your armor: ");
-        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, true);
+        int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
         switch(armorSelection){
             case 1:
                 armor = new Armor("Gambeson", ArmorType.PADDED, 3);

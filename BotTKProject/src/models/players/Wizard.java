@@ -6,12 +6,13 @@ import models.enums.Icons;
 import models.Spell;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Wizard extends Player implements Serializable {
     private ArrayList<Spell> spells = new ArrayList<>();
 
-    public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Spell[] spells, Icons icon, Armor armor, boolean isHuman) {
+    public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, ArrayList<Spell> spells, Icons icon, Armor armor, boolean isHuman) {
         super(name, icon, isHuman);
         setSpells(spells);
         setMaxHealth(maxHealth);
@@ -28,7 +29,7 @@ public class Wizard extends Player implements Serializable {
         return spells;
     }
 
-    public void setSpells(Spell[] spells) {
+    public void setSpells(ArrayList<Spell> spells) {
         this.spells = getSpells();
     }
 

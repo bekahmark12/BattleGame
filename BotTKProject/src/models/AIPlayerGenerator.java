@@ -141,10 +141,13 @@ public class AIPlayerGenerator {
     }
 
     public Player generateRandomWizard(){
-        Spell fireBallSpell = new Spell(5, 4, 4, SpellType.FIRE);
-        Spell healingSpell = new Spell(5, 0, 0, SpellType.HEAL);
-        Spell shieldSpell = new Spell(4, 6, 0, SpellType.SHIELD);
-        Spell[]spells = {fireBallSpell, healingSpell, shieldSpell};
+        ArrayList<Spell> spells = new ArrayList<>();
+        Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
+        Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
+        Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
+        spells.add(fireBall);
+        spells.add(heal);
+        spells.add(shield);
         randName = generateRandomName();
         randArmor = generateRandWizardArmor();
 
