@@ -1,7 +1,7 @@
 package controllers;
 
-import models.enums.Icons;
-import models.players.Player;
+import models.Icons;
+import models.Player;
 
 import java.awt.*;
 import java.util.Stack;
@@ -81,7 +81,7 @@ public class AIPathing {
     public boolean depthFirstSearch(Icons[][] map, Point p){
         visited = createVisitedArray(map);
         neighbors = findPath(map, p);
-        if (map[p.x][p.y] == Icons.P){
+        if (map[p.x][p.y] == Icons.B){
             return true;
         }
         if (neighbors.isEmpty()){

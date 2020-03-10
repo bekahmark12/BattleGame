@@ -1,8 +1,5 @@
-package models.players;
+package models;
 
-
-import models.Armor;
-import models.enums.Icons;
 
 import java.io.Serializable;
 

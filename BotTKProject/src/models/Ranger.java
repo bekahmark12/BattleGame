@@ -1,16 +1,12 @@
-package models.players;
-
-import models.Armor;
-import models.enums.ArmorType;
-import models.enums.Icons;
-import models.Weapon;
+package models;
 
 import java.io.Serializable;
 
-public class Warrior extends Player implements Serializable {
+public class Ranger extends Player implements Serializable {
     private Weapon weapon;
 
-    public Warrior(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Icons icon, Armor armor, boolean isHuman) {
+
+    public Ranger(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, Weapon weapon, Armor armor, Icons icon, boolean isHuman) {
         super(name, icon, isHuman);
         setWeapon(weapon);
         setMaxHealth(maxHealth);
@@ -21,6 +17,7 @@ public class Warrior extends Player implements Serializable {
         setDexterity(dexterity);
         setArmor(armor);
         setHealth(maxHealth);
+
     }
 
     public Weapon getWeapon() {
@@ -33,56 +30,56 @@ public class Warrior extends Player implements Serializable {
 
     @Override
     public void setMaxHealth(int maxHealth) {
-        if(maxHealth > 35){
-            throw new IllegalStateException("Warrior's maxHealth cannot be more than ");
+        if(maxHealth > 25){
+            throw new IllegalArgumentException("Archer's maxHealth cannot be more than 25");
         }
         this.maxHealth = maxHealth;
     }
 
     @Override
     public void setStamina(int stamina) {
-        if(stamina > 5){
-            throw new IllegalArgumentException("Warrior's stamina cannot be more than 5");
+        if(stamina > 7){
+            throw new IllegalArgumentException("Archer's stamina cannot be more than 7");
         }
         this.stamina = stamina;
     }
 
     @Override
     public void setStrength(int strength) {
-        if(strength > 10){
-            throw new IllegalArgumentException("Warrior's strength cannot be more than 10");
+        if(strength > 7){
+            throw new IllegalArgumentException("Archer's stamina cannot be more than 7");
         }
         this.strength = strength;
     }
 
     @Override
     public void setAgility(int agility) {
-        if(agility > 6){
-            throw new IllegalArgumentException("Warrior's agility cannot be more than 6");
+        if(agility > 12){
+            throw new IllegalArgumentException("Archer's agility cannot be more than 12");
         }
         this.agility = agility;
     }
 
     @Override
     public void setWisdom(int wisdom) {
-        if(wisdom > 4){
-            throw new IllegalArgumentException("Warrior's wisdom cannot be more than 4");
+        if(wisdom > 6){
+            throw new IllegalArgumentException("Archer's wisdom cannot be more than 6");
         }
         this.wisdom = wisdom;
     }
 
     @Override
     public void setDexterity(int dexterity) {
-        if(dexterity > 6){
-            throw new IllegalArgumentException("Warrior's dexterity cannot be more than 6");
+        if(dexterity > 15){
+            throw new IllegalArgumentException("Archer's dexterity cannot be more than 15");
         }
         this.dexterity = dexterity;
     }
 
     @Override
     public void setArmor(Armor armor) {
-        if(armor.armorType == ArmorType.PADDED){
-            throw new IllegalArgumentException("Warrior's armor cannot be of type PADDED");
+        if(armor.armorType == ArmorType.PLATE){
+            throw new IllegalArgumentException("Archer's armor cannot be of type PLATE");
         }
         this.armor = armor;
     }
