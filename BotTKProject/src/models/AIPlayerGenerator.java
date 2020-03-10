@@ -30,16 +30,13 @@ public class AIPlayerGenerator {
 
 
     public Player generateAIPlayer(){
-        int possiblePlayers = rand.nextInt(3);
+        int possiblePlayers = rand.nextInt(2);
         switch(possiblePlayers){
             case 0:
                 generateRandomRanger();
                 break;
             case 1:
                 generateRandomWarrior();
-                break;
-            case 2:
-//                generateRandomWizard();
                 break;
         }
         return player;
@@ -140,18 +137,18 @@ public class AIPlayerGenerator {
         return AIWarrior;
     }
 
-    public Player generateRandomWizard(){
-        ArrayList<Spell> spells = new ArrayList<>();
-        Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
-        Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
-        Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
-        spells.add(fireBall);
-        spells.add(heal);
-        spells.add(shield);
-        randName = generateRandomName();
-        randArmor = generateRandWizardArmor();
-
-        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
-        return AIWizard;
-    }
+//    public Player generateRandomWizard(){
+//        ArrayList<Spell> spells = new ArrayList<>();
+//        Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
+//        Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
+//        Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
+//        spells.add(fireBall);
+//        spells.add(heal);
+//        spells.add(shield);
+//        randName = generateRandomName();
+//        randArmor = generateRandWizardArmor();
+//
+//        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
+//        return AIWizard;
+//    }
 }

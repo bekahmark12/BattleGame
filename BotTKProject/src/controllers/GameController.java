@@ -20,6 +20,8 @@ public class GameController {
     private static ArrayList<Player> players  = new ArrayList();
     private static Game game = new Game();
     private static boolean isPlayer1Turn;
+    public static AIPlayerGenerator AIGenerator = new AIPlayerGenerator();
+    public static AIPathing AIController = new AIPathing();
 
     public static void addPlayer(Player player){
         players.add(player);
@@ -63,7 +65,7 @@ public class GameController {
         switch(selection){
             case 1:
                 makePlayer();
-//                makeAI();
+                AIGenerator.generateAIPlayer();
                 newMap();
                 playGame();
                 break;
@@ -93,7 +95,7 @@ public class GameController {
                     hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-//                   hasQuit = takeAITurn(p.getRow(), p.getCol(), p);
+                   hasQuit = takeAITurn(p.getRow(), p.getCol(), p);
                 }
 
             }
@@ -105,6 +107,21 @@ public class GameController {
 
 
     }
+
+    public static void takeAITurn(Icons[][]map, Player AIPlayer, Player opponent){
+        AIController.AIMoveTowardsOpponent(map, AIPlayer);
+        int distance = calculateDistance();
+        int attackRange = 0;
+        if(AIPlayer instanceof Warrior){
+            attackRange = ((Warrior) AIPlayer).getWeapon().getIdealRange();
+        } else if(AIPlayer instanceof Ranger){
+            attackRange = ((Ranger) AIPlayer).getWeapon().getIdealRange();
+        }
+        if(distance <= attackRange){
+            combat(AIPlayer, opponent);
+        }
+    }
+
 
     public static boolean takeHumanTurn(int row, int col, Player p){
         int currentStamina = p.getStamina();

@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0d272649-c78a-44ab-9044-8628df4b8b33" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/AIPathing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AIPathing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/AIPlayerGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/AIPlayerGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Weapon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
