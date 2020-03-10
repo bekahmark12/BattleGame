@@ -1,5 +1,6 @@
 package models;
 
+import models.enums.*;
 import models.players.Player;
 
 import java.io.Serializable;
