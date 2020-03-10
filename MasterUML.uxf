@@ -50,13 +50,14 @@ _- isPlayer1Turn : boolean_
 --
 _+ addPlayer(player : Player) : void_
 _+ newMap() : void_
-_+ getPlayers() : ArrayList&lt;Player&gt;
+_+ getPlayers() : ArrayList&lt;Player&gt;_
 
 _+ run() : void_
 _+ mainMenu() : void_
 _+ startGame() : void_
 _+ takeHumanTurn(row : int, col : int, p : Player) : void_
 _+ evaluateOptions(row : int, col : int, p : Player) : Stringp[ ]_
+_+ calculateDistance() : int_
 _+ flipTheCoin() : boolean
 _+ makePlayer() : void_
 _+ createRanger() : Player_
@@ -66,10 +67,8 @@ _+ playGame(mode : int) : void_
 _+ saveGame() : void_
 _+ loadGame() : void_
 
-_+ movePlayer(player : Player, row : int, col : int) : void_
 _+ combat(attacker : Player, defender : Player) : boolean_
-_+ hitChance(attacker : Player, defender : Player) : float_
-_+ calculateRange(attacker : Player, defender : Player) : int_
+_+ hitChance(attacker : Player, defender : Player) : float__
 _+ damageMin(attacker : Player, defender : Player) : int_
 _+ damageMax(attacker : Player, defender : Player) : int_
 
@@ -210,19 +209,21 @@ _ &lt;&lt;Flat Ground&gt;&gt;</panel_attributes>
       <x>664</x>
       <y>952</y>
       <w>248</w>
-      <h>136</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>Map
 --
 _- grid : Icons[ ][ ]_
 _- rng : Random_
 --
-_- randomMap() : Icons[ ][ ]_
+_+ randomMap() : Icons[ ][ ]_
 _+ checkValidSpace(row : int, cols : int) : boolean_
+_+ printBoard(board : Icons[ ][ ]) : void_
+_+ placePlayer(players : ArrayList&lt;Player&gt;) : void_
 
-_+ printBoard(board : Icons[ ][ ]) : void
-
-_+ getGrid() : Icons[ ][ ]_</panel_attributes>
+_+ setIcon(row : int, col : int, icon) : void_
+_+ getGrid() : Icons[ ][ ]_
+_+ setGrid(grid : Icons[ ][ ]) : void_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -409,7 +410,7 @@ _+ getGrid() : Icons[ ][ ]_</panel_attributes>
       <x>576</x>
       <y>152</y>
       <w>1184</w>
-      <h>952</h>
+      <h>968</h>
     </coordinates>
     <panel_attributes>models
 --
