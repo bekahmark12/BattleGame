@@ -1,5 +1,7 @@
 package models;
 
+import models.enums.SpellType;
+
 import java.io.Serializable;
 
 public class Spell implements Serializable {

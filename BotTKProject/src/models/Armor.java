@@ -1,5 +1,7 @@
 package models;
 
+import models.enums.ArmorType;
+
 import java.io.Serializable;
 
 public class Armor implements Serializable {

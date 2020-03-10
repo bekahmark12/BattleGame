@@ -1,5 +1,7 @@
 package models;
 
+import models.players.Player;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

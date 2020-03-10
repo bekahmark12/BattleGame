@@ -2,6 +2,14 @@ package controllers;
 
 import lib.ConsoleIO;
 import models.*;
+import models.enums.ArmorType;
+import models.enums.Icons;
+import models.enums.SpellType;
+import models.enums.WeaponType;
+import models.players.Player;
+import models.players.Ranger;
+import models.players.Warrior;
+import models.players.Wizard;
 
 import java.io.*;
 import java.util.ArrayList;
