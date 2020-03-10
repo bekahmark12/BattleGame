@@ -57,12 +57,7 @@ public class GameController {
         switch(selection){
             case 1:
                 makePlayer(Icons.A);
-<<<<<<< HEAD
-//                makeAI(Icons.B);
-
-=======
                 makeAIPlayer(Icons.B);
->>>>>>> ab4eec58e8ac5f6559fa0b59c4322e5d80a605b3
                 newMap();
                 playGame();
                 break;
@@ -98,7 +93,6 @@ public class GameController {
                     hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
-
                     takeAITurn(getPlayers().get(1), getPlayers().get(0));
                 }
 
@@ -111,7 +105,6 @@ public class GameController {
 
 
     }
-
 
     public static void takeAITurn(Player AIPlayer, Player opponent){
         AIController.AIMoveTowardsOpponent(map.getGrid(), AIPlayer);
