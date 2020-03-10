@@ -1,12 +1,6 @@
-package models.players;
-
-import models.Armor;
-import models.enums.ArmorType;
-import models.enums.Icons;
-import models.Spell;
+package models;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Wizard extends Player implements Serializable {

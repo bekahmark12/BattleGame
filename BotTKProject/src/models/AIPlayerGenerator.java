@@ -1,11 +1,5 @@
 package models;
 
-import models.enums.*;
-import models.players.Player;
-import models.players.Ranger;
-import models.players.Warrior;
-import models.players.Wizard;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -127,7 +121,7 @@ public class AIPlayerGenerator {
         randWeapon = generateRandRangerWeapon();
         randArmor = generateRandRangerArmor();
 
-        Player AIRanger = new Ranger(randName, 25, 7, 4, 12, 6, 15, randWeapon, randArmor, Icons.O,  false);
+        Player AIRanger = new Ranger(randName, 25, 7, 4, 12, 6, 15, randWeapon, randArmor, Icons.B,  false);
         return AIRanger;
     }
 
@@ -136,7 +130,7 @@ public class AIPlayerGenerator {
         randWeapon = generateRandWarriorWeapon();
         randArmor = generateRandWarriorArmor();
 
-        Player AIWarrior = new Warrior(randName, 20, 30, 25, 10, 15, 4, randWeapon, Icons.P, randArmor, false);
+        Player AIWarrior = new Warrior(randName, 20, 30, 25, 10, 15, 4, randWeapon, Icons.B, randArmor, false);
         return AIWarrior;
     }
 
@@ -151,7 +145,7 @@ public class AIPlayerGenerator {
         randName = generateRandomName();
         randArmor = generateRandWizardArmor();
 
-        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.T, randArmor, false);
+        Player AIWizard = new Wizard(randName, 40, 20, 15, 12, 25, 5, spells, Icons.B, randArmor, false);
         return AIWizard;
     }
 }
