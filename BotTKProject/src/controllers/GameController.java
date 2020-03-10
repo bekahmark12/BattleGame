@@ -76,12 +76,18 @@ public class GameController {
         do{
             if(isPlayer1Turn){
                 Player p = getPlayers().get(0);
+                String message = "\n\n\n" + p.getName() + ", it's your turn. You are " + p.getIcon() + "\n\n\n";
+                ConsoleIO.printString(message);
+                ConsoleIO.delay(3);
                 hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
 
             }
             else{
                 Player p = getPlayers().get(1);
                 if(p.isHuman){
+                    String message = "\n\n\n" + p.getName() + ", it's your turn. You are " + p.getIcon() + "\n\n\n";
+                    ConsoleIO.printString(message);
+                    ConsoleIO.delay(3);
                     hasQuit = takeHumanTurn(p.getRow(), p.getCol(), p);
                 }
                 else{
