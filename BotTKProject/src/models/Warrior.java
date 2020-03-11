@@ -26,6 +26,7 @@ public class Warrior extends Player implements Serializable {
         this.weapon = weapon;
     }
 
+
     @Override
     public void setMaxHealth(int maxHealth) {
         if(maxHealth > 35){
