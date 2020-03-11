@@ -11,6 +11,8 @@ public class GameController {
     private static Map map = new Map();
     private static ArrayList<Player> players  = new ArrayList();
     private static Game game = new Game();
+    static boolean player1IsAlive = true;
+    static boolean player2IsAlive = true;
     private static boolean isPlayer1Turn;
     public static AIPlayerGenerator AIGenerator = new AIPlayerGenerator();
     public static AIPathing AIController = new AIPathing();
@@ -71,8 +73,8 @@ public class GameController {
     }
 
     public static void playGame(){
-        boolean player1IsAlive = true;
-        boolean player2IsAlive = true;
+        player1IsAlive = true;
+        player2IsAlive = true;
         boolean hasQuit = false;
 
         do{
@@ -102,7 +104,14 @@ public class GameController {
             }
 
         }while (player1IsAlive && player2IsAlive && !hasQuit);
-
+            if(!player1IsAlive){
+                ConsoleIO.printString("\n\n\n***" + players.get(0).getName() + " has been slain! All hail the True King, " + players.get(1).getName() + "***\n\n\n\n\n");
+                ConsoleIO.delay(5);
+            }
+            else if(!player2IsAlive){
+                ConsoleIO.printString("\n\n\n***" + players.get(1).getName() + " has been slain! All hail the True King, " + players.get(0).getName() + "***\n\n\n\n\n");
+                ConsoleIO.delay(5);
+            }
 
     }
 
@@ -123,8 +132,11 @@ public class GameController {
 
     public static boolean takeHumanTurn(int row, int col, Player p){
         int currentStamina = p.getStamina();
+        if(p.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            ((Wizard)p).setShield(0);
+        }
         int selection = -1;
-        boolean hasQuit = false;
+        boolean turnEnded = false;
         do{
             map.printBoard();
             ConsoleIO.delay(2);
@@ -133,7 +145,7 @@ public class GameController {
             selection = ConsoleIO.promptForMenuSelection(playerOptions, true, "Save and exit");
             if(selection == 0){
                 saveGame();
-                hasQuit = true;
+                turnEnded = true;
             }
             else if(playerOptions[selection - 1].equalsIgnoreCase("move up")){
                 map.setIcon(p.getRow(), p.getCol(), Icons._);
@@ -165,38 +177,129 @@ public class GameController {
             }
             else if(playerOptions[selection - 1].equalsIgnoreCase("Cast Fireball at enemy (2 stamina)")){
                 if(isPlayer1Turn){
-                    combat(p, getPlayers().get(1));
+                    turnEnded = combat(p, getPlayers().get(1));
+                    if(turnEnded){
+                        player2IsAlive = false;
+                    }
                 }
                 else{
-                    combat(getPlayers().get(1), p);
+                    turnEnded = combat(p, getPlayers().get(0));
+                    if(turnEnded){
+                        player1IsAlive = false;
+                    }
                 }
                 currentStamina -= 2;
             }
-        } while(currentStamina > 0 && selection != 0);
-        return hasQuit;
+            else if(playerOptions[selection - 1].equalsIgnoreCase("Cast Heal on self +5HP (5 stamina)")){
+                p.setHealth(p.getHealth() + 5);
+                if(p.getHealth() > p.getMaxHealth()){
+                    p.setHealth(p.getMaxHealth());
+                }
+                currentStamina -= 5;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("Cast Shield on self(3 stamina)")){
+                ((Wizard)p).setShield(3);
+                currentStamina -= 3;
+            }
+            else if(playerOptions[selection - 1].equalsIgnoreCase("Attack enemy (2 stamina)")){
+                if(isPlayer1Turn){
+                    turnEnded = combat(p, getPlayers().get(1));
+                    if(turnEnded){
+                        player2IsAlive = false;
+                    }
+                }
+                else{
+                    turnEnded = combat(p, getPlayers().get(0));
+                    if(turnEnded){
+                        player1IsAlive = false;
+                    }
+                }
+                currentStamina -= 2;
+            }
+        } while(currentStamina > 0 && !turnEnded);
+        return turnEnded;
     }
 
-    private static void combat(Player attacker, Player defender) {
+    private static boolean combat(Player attacker, Player defender) {
+        boolean hasDied = false;
         int hitChance = hitChance(attacker, defender);
         System.out.println(hitChance);
         Random rng = new Random();
-        boolean hasHit = ((rng.nextInt(100) + 1) >= hitChance);
+        boolean hasHit = ((rng.nextInt(100) + 1) <= hitChance);
         System.out.println(hasHit);
-        ConsoleIO.delay(3);
-        int damage = calculateDamage(attacker, defender);
-        System.out.println(damage);
+        if (hasHit) {
+            int damage = calculateDamage(attacker, defender);
+            System.out.println(damage);
+            ConsoleIO.delay(4);
+            defender.setHealth(defender.getHealth() - damage);
+            if (defender.getHealth() <= 0) {
+                hasDied = true;
+            }
+        }
+        return hasDied;
     }
 
     private static int calculateDamage(Player attacker, Player defender) {
         int damage = 0;
+        Armor armor = defender.getArmor();
         if(attacker.getClass().getSimpleName().equalsIgnoreCase("wizard")){
             damage = ((Wizard)attacker).getSpells().get(0).getAffectRating();
-            if(defender.getArmor().armorType == ArmorType.PADDED){
-                damage = (int)(damage * 1.5f);
+            damage += (attacker.getWisdom() / 3);
+            if(armor.armorType == ArmorType.PADDED) {
+                damage = (int) (damage * 1.5f);
             }
-            else if(defender.getArmor().armorType == ArmorType.PLATE){
+            else if(armor.armorType == ArmorType.PLATE){
                 damage = (int)(damage * .75f);
             }
+
+        }
+        else if(attacker.getClass().getSimpleName().equalsIgnoreCase("ranger")){
+            Weapon weapon = ((Ranger)attacker).getWeapon();
+            damage = weapon.damageRating;
+            damage += (attacker.getDexterity() / 3);
+            if(weapon.damageType == WeaponType.PEIRCE){
+                if(armor.armorType == ArmorType.PADDED){
+                    damage = (int)(damage * 1.5f);
+                }
+                else if(armor.armorType == ArmorType.MAIL){
+                    damage = (int)(damage * .75f);
+                }
+            }
+            else{
+                if(armor.armorType == ArmorType.MAIL){
+                    damage = (int)(damage * 1.5f);
+                }
+                else if(armor.armorType == ArmorType.PLATE){
+                    damage = (int)(damage * .75f);
+                }
+            }
+        }
+        else{
+            Weapon weapon = ((Warrior)attacker).getWeapon();
+            damage = weapon.damageRating;
+            damage += (attacker.getStrength() / 3);
+            if(weapon.damageType == WeaponType.SLASH){
+                if(armor.armorType == ArmorType.MAIL){
+                    damage = (int)(damage * 1.5f);
+                }
+                else if(armor.armorType == ArmorType.PLATE){
+                    damage = (int)(damage * .75f);
+                }
+            }
+            else{
+                if(armor.armorType == ArmorType.PLATE){
+                    damage = (int)(damage * 1.5f);
+                }
+                else if(armor.armorType == ArmorType.PADDED){
+                    damage = (int)(damage * .75f);
+                }
+            }
+        }
+        if(defender.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            damage -= armor.armorRating - ((Wizard)defender).getShield();
+        }
+        else{
+            damage-= armor.armorRating;
         }
         return damage;
     }
@@ -206,6 +309,15 @@ public class GameController {
         int chance = 100;
         if(attacker.getClass().getSimpleName().equalsIgnoreCase("wizard")){
             chance -= (distance * 10);
+            chance -= (defender.getAgility() * 5);
+            chance += (attacker.getDexterity() * 4);
+        }
+        else if(attacker.getClass().getSimpleName().equalsIgnoreCase("ranger")){
+            chance -= (distance * 8);
+            chance -= (defender.getAgility() * 7);
+            chance += (attacker.getDexterity() * 3);
+        }
+        else{
             chance -= (defender.getAgility() * 5);
             chance += (attacker.getDexterity() * 4);
         }
@@ -232,7 +344,7 @@ public class GameController {
                 optionsList.add("Cast Fireball at enemy (2 stamina)");
             }
             if(p.getHealth() < p.getMaxHealth() && stamina >= 5){
-                optionsList.add("Cast Heal on self (5 stamina)");
+                optionsList.add("Cast Heal on self +5HP (5 stamina)");
             }
             if(stamina >= 3) {
                 optionsList.add("Cast Shield on self(3 stamina)");
@@ -303,8 +415,8 @@ public class GameController {
         Armor armor;
         Weapon weapon;
 
-        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Gambeson: type: padded, rating: 3"};
-        String[] weaponTypes = {"Longbow: type: Pierce, rating: 6, ideal range: 3", "Longsword: type : slash, rating: 5, ideal range: 1"};
+        String[] armorTypes = {"Chainmail: type: mail, rating: 5", "Gambeson: type: padded, rating: 4"};
+        String[] weaponTypes = {"Longbow: type: Pierce, rating: 8, range: 3", "Longsword: type : slash, rating: 9, range: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
         int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false, null);
@@ -313,7 +425,7 @@ public class GameController {
                 armor = new Armor("Chain Mail", ArmorType.MAIL, 5);
                 break;
             case 2:
-                armor = new Armor("Gambeson", ArmorType.PADDED, 3);
+                armor = new Armor("Gambeson", ArmorType.PADDED, 4);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
@@ -321,10 +433,10 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 6, 3);
+                weapon = new Weapon("Longbow", WeaponType.PEIRCE, 8, 3);
                 break;
             case 2:
-                weapon = new Weapon( "Longsword", WeaponType.SLASH, 5, 1);
+                weapon = new Weapon( "Longsword", WeaponType.SLASH, 9, 1);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
@@ -337,8 +449,8 @@ public class GameController {
         Player warrior;
         Armor armor;
         Weapon weapon;
-        String[] armorTypes = {"Chainmail: type: mail, rating: 4", "Plate: type: steel, rating: 5"};
-        String[] weaponTypes = {"Sword", "Spear"};
+        String[] armorTypes = {"Chainmail: type: mail, rating: 5", "Steel Plate: type: plate, rating: 6"};
+        String[] weaponTypes = {"Sword: type: slash, rating: 7, range: 1", "Morning Star: type: blunt, rating: 6, range: 1"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
         int weaponSelection = ConsoleIO.promptForMenuSelection(weaponTypes, false, null);
@@ -347,7 +459,7 @@ public class GameController {
                 armor = new Armor("Chain Mail", ArmorType.MAIL, 5);
                 break;
             case 2:
-                armor = new Armor("Steel", ArmorType.PLATE, 7);
+                armor = new Armor("Steel Plate", ArmorType.PLATE, 6);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
@@ -355,10 +467,10 @@ public class GameController {
 
         switch(weaponSelection){
             case 1:
-                weapon = new Weapon("Sword", WeaponType.SLASH, 6, 1);
+                weapon = new Weapon("Sword", WeaponType.SLASH, 7, 1);
                 break;
             case 2:
-                weapon = new Weapon("Spear", WeaponType.PEIRCE, 4, 2);
+                weapon = new Weapon("Morning Star", WeaponType.BLUNT, 6, 1);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + weaponSelection);
@@ -371,27 +483,27 @@ public class GameController {
     public static Player createWizard(String name, Icons icon){
         Armor armor;
         ArrayList<Spell> spells = new ArrayList<>();
-        Spell fireBall = new Spell(2, 3, 4, SpellType.FIRE);
+        Spell fireBall = new Spell(2, 3, 6, SpellType.FIRE);
         Spell heal = new Spell(5, 0, 5, SpellType.HEAL);
         Spell shield = new Spell(3, 0, 4, SpellType.SHIELD);
         spells.add(fireBall);
         spells.add(heal);
         spells.add(shield);
-        String[] armorTypes = {"Gambeson: type: padded, rating: 3", "Cloak: type: padded, rating: 1"};
+        String[] armorTypes = {"Gambeson: type: padded, rating: 4", "Cloak: type: padded, rating: 2"};
         ConsoleIO.printString("Please select your armor: ");
         int armorSelection = ConsoleIO.promptForMenuSelection(armorTypes, false, null);
         switch(armorSelection){
             case 1:
-                armor = new Armor("Gambeson", ArmorType.PADDED, 3);
+                armor = new Armor("Gambeson", ArmorType.PADDED, 4);
                 break;
             case 2:
-                armor = new Armor("Cloak", ArmorType.PADDED, 1);
+                armor = new Armor("Cloak", ArmorType.PADDED, 2);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + armorSelection);
         }
 
-        Player wizard = new Wizard(name, 20, 6, 4, 8, 10, 9, spells, icon, armor, true);
+        Player wizard = new Wizard(name, 20, 7, 4, 8, 10, 9, spells, icon, armor, true);
         return wizard;
     }
 

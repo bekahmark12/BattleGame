@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Wizard extends Player implements Serializable {
     private ArrayList<Spell> spells = new ArrayList<>();
+    private int shield;
 
     public Wizard(String name, int maxHealth, int stamina, int strength, int agility, int wisdom, int dexterity, ArrayList<Spell> spells, Icons icon, Armor armor, boolean isHuman) {
         super(name, icon, isHuman);
@@ -27,6 +28,17 @@ public class Wizard extends Player implements Serializable {
         this.spells = spells;
     }
 
+    public int getShield(){
+        return shield;
+    }
+
+    public void setShield(int shield){
+        if(shield > 3){
+            throw new IllegalStateException("Shield cannot be more than 3");
+        }
+        this.shield = shield;
+    }
+
     @Override
     public void setMaxHealth(int maxHealth) {
         if(maxHealth > 20){
@@ -37,8 +49,8 @@ public class Wizard extends Player implements Serializable {
 
     @Override
     public void setStamina(int stamina) {
-        if(stamina > 6){
-            throw new IllegalStateException("Wizard's stamina cannot be more than 6");
+        if(stamina > 7){
+            throw new IllegalStateException("Wizard's stamina cannot be more than 7");
         }
         this.stamina = stamina;
     }
