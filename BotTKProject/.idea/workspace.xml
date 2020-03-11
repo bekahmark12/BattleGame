@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d272649-c78a-44ab-9044-8628df4b8b33" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/controllers/AIPathing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/controllers/AIPathing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/controllers/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/models/AIPlayerGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/models/AIPlayerGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/models/Wizard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/models/Wizard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/AIPathing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AIPathing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,14 +196,25 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
-          <line>296</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/AIPathing.java</url>
           <line>112</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
+          <line>407</line>
+          <properties class="controllers.GameController" method="makeAIPlayer">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
+          <line>117</line>
+          <properties class="controllers.GameController" method="takeAITurn">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

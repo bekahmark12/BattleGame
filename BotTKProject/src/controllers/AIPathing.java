@@ -109,7 +109,7 @@ public class AIPathing {
     }
 
 
-    public static void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer) {
+    public static void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer, Player opponent) {
         int currentRow = AIPlayer.getRow();
         int currentCol = AIPlayer.getCol();
         Point AICurrentLocation = new Point(currentRow, currentCol);
@@ -124,6 +124,8 @@ public class AIPathing {
         } else {
             int moveCount = 0;
             do {
+
+
                 int spaceAbove = AIPlayer.getRow() - 1;
                 int spaceBelow = AIPlayer.getCol() + 1;
                 int spaceRight = AIPlayer.getRow() + 1;
@@ -133,42 +135,57 @@ public class AIPathing {
                 Point pointBelow = new Point(spaceBelow, currentCol);
                 Point pointLeft = new Point(currentRow, spaceLeft);
                 Point pointRight = new Point(currentRow, spaceRight);
+                Point directionPoint = getDirectionBetweenPlayers(AIPlayer, opponent);
+                int x = directionPoint.x;
+                int y = directionPoint.y;
+                Point primDir = (Math.abs(x) > y ? (x > -1 ? primDir = pointBelow : pointAbove) : (y > -1 ? primDir = pointRight : pointLeft));
 
-                Point primDir =
-
-//                if(spaceLeft == map[0].length && canTraverse(map, pointLeft)) {
-//                    moveLeft(map, AIPlayer);
-//                    System.out.println("Computer moved left");
-//                    moveCount++;
-//                } else if (spaceRight < map[0].length && canTraverse(map, pointRight)) {
-//                    moveRight(map, AIPlayer);
-//                    System.out.println("Computer moved right");
-//                    moveCount++;
-//                } else if(spaceBelow == map.length && canTraverse(map, pointBelow)){
-//                    moveDown(map, AIPlayer);
-//                    System.out.println("Computer moved down");
-//                } else if(spaceAbove < map.length && canTraverse(map, pointAbove)) {
-//                    moveUp(map, AIPlayer);
-//                    System.out.println("Computer moved up");
-//                    moveCount++;
-//                }
-
-
-                //get the coord point of player and AI
-                //subtract player - AI into directional point
-
-
-
-                // if absolute of |x| is greater than y
-                    // if x is greater than -1
-                        // go down
-                    // else
-                        // up
-                // else
-                    // if absolute |y| is greater than -1
-                        //go right
-                            //else go left
-
+                if(primDir == pointAbove && valid(map, pointAbove)){
+                    moveUp(map, AIPlayer);
+                    moveCount++;
+                    if(!valid(map, pointAbove)){
+                        if(valid(map, pointBelow)){
+                            moveDown(map, AIPlayer);
+                            moveCount++;
+                        }
+                    }
+                } else if(primDir == pointBelow && valid(map, pointBelow)){
+                    moveDown(map, AIPlayer);
+                    moveCount++;
+                    if(!valid(map, pointBelow)){
+                        if(valid(map, pointAbove)){
+                            moveUp(map, AIPlayer);
+                            moveCount++;
+                        } else {
+                            moveLeft(map, AIPlayer);
+                            moveCount++;
+                        }
+                    }
+                } else if(primDir == pointLeft && valid(map, pointLeft)){
+                    moveLeft(map, AIPlayer);
+                    moveCount++;
+                    if(!valid(map, pointLeft)){
+                        if(valid(map, pointRight)){
+                            moveRight(map, AIPlayer);
+                            moveCount++;
+                        } else {
+                            moveUp(map, AIPlayer);
+                            moveCount++;
+                        }
+                    }
+                } else if(primDir == pointRight && valid(map, pointRight)){
+                    moveRight(map, AIPlayer);
+                    moveCount++;
+                    if(!valid(map, pointRight)){
+                        if(valid(map, pointLeft)){
+                            moveLeft(map, AIPlayer);
+                            moveCount++;
+                        } else {
+                            moveDown(map, AIPlayer);
+                            moveCount++;
+                        }
+                    }
+                }
             } while(moveCount <= AIPlayer.getDexterity());
         }
     }

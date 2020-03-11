@@ -116,7 +116,7 @@ public class GameController {
     }
 
     public static void takeAITurn(Player AIPlayer, Player opponent){
-        AIController.AIMoveTowardsOpponent(map.getGrid(), AIPlayer);
+        AIController.AIMoveTowardsOpponent(map.getGrid(), AIPlayer, opponent);
         int distance = calculateDistance();
         int attackRange = 0;
         if(AIPlayer instanceof Warrior){
