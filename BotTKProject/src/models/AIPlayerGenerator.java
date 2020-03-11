@@ -5,38 +5,33 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class AIPlayerGenerator {
-    private String randName;
-    private Armor randArmor;
-    private Weapon randWeapon;
-    private int randMaxHealth;
-    private int randStamina;
-    private int randStrength;
-    private int randAgility;
-    private int randWisdom;
-    private Icon randIcon;
-    private Armor mail = new Armor("Chain Mail", ArmorType.MAIL, 5);
-    private Armor gambeson = new Armor("Gambeson", ArmorType.PADDED, 3);
-    private Armor steel = new Armor("Steel Plate", ArmorType.PLATE, 7);
-    private Armor cloak = new Armor("Cloak", ArmorType.PADDED, 4);
-    private Random rand = new Random();
-    private int possibleArmorOrWeapon = rand.nextInt(2);
-    private Player player;
+    private static String randName;
+    private static Armor randArmor;
+    private static Weapon randWeapon;
+    private static Armor mail = new Armor("Chain Mail", ArmorType.MAIL, 5);
+    private static Armor gambeson = new Armor("Gambeson", ArmorType.PADDED, 3);
+    private static Armor steel = new Armor("Steel Plate", ArmorType.PLATE, 7);
+    private static Armor cloak = new Armor("Cloak", ArmorType.PADDED, 4);
+    private static Random rand = new Random();
+    private static int possibleArmorOrWeapon = rand.nextInt(2);
+    private static Player player;
 
 
-    public Player generateAIPlayer(){
+    public static Player generateAIPlayer(Icons icon){
+        Player aiPlayer = null;
         int possiblePlayers = rand.nextInt(2);
         switch(possiblePlayers){
             case 0:
-                generateRandomRanger();
+                aiPlayer = generateRandomRanger(icon);
                 break;
             case 1:
-                generateRandomWarrior();
+                aiPlayer =generateRandomWarrior(icon);
                 break;
         }
-        return player;
+        return aiPlayer;
     }
 
-    public String generateRandomName(){
+    public static String generateRandomName(){
         String name;
         RandomAINames values[] = RandomAINames.values();
         ArrayList<RandomAINames> randomAINamesArrayList = new ArrayList<>();
@@ -47,7 +42,7 @@ public class AIPlayerGenerator {
         return name = randomAINamesArrayList.get(possibleNames).toString();
     }
 
-    public Armor generateRandWizardArmor(){
+    public static Armor generateRandWizardArmor(){
         Armor armor = null;
         switch(possibleArmorOrWeapon){
             case 0:
@@ -60,7 +55,7 @@ public class AIPlayerGenerator {
         return armor;
     }
 
-    public Armor generateRandWarriorArmor(){
+    public static Armor generateRandWarriorArmor(){
         Armor armor = null;
         switch(possibleArmorOrWeapon){
             case 0:
@@ -73,7 +68,7 @@ public class AIPlayerGenerator {
         return armor;
     }
 
-    public Armor generateRandRangerArmor(){
+    public static Armor generateRandRangerArmor(){
         Armor armor = null;
         switch(possibleArmorOrWeapon){
             case 0:
@@ -86,7 +81,7 @@ public class AIPlayerGenerator {
         return armor;
     }
 
-    public Weapon generateRandRangerWeapon(){
+    public static Weapon generateRandRangerWeapon(){
         Weapon weapon = null;
         switch(possibleArmorOrWeapon){
             case 0:
@@ -99,7 +94,7 @@ public class AIPlayerGenerator {
         return weapon;
     }
 
-    public Weapon generateRandWarriorWeapon(){
+    public static Weapon generateRandWarriorWeapon(){
         Weapon weapon = null;
         switch(possibleArmorOrWeapon){
             case 0:
@@ -113,21 +108,21 @@ public class AIPlayerGenerator {
     }
 
 
-    public Player generateRandomRanger(){
+    public static Player generateRandomRanger(Icons icon){
         randName = generateRandomName();
         randWeapon = generateRandRangerWeapon();
         randArmor = generateRandRangerArmor();
 
-        Player AIRanger = new Ranger(randName, 25, 7, 4, 12, 6, 15, randWeapon, randArmor, Icons.B,  false);
+        Player AIRanger = new Ranger(randName, 25, 7, 4, 12, 6, 15, randWeapon, randArmor, icon,  false);
         return AIRanger;
     }
 
-    public Player generateRandomWarrior(){
+    public static Player generateRandomWarrior(Icons icon){
         randName = generateRandomName();
         randWeapon = generateRandWarriorWeapon();
         randArmor = generateRandWarriorArmor();
 
-        Player AIWarrior = new Warrior(randName, 20, 30, 25, 10, 15, 4, randWeapon, Icons.B, randArmor, false);
+        Player AIWarrior = new Warrior(randName, 35, 5, 10, 6, 4, 6, randWeapon, icon, randArmor, false);
         return AIWarrior;
     }
 

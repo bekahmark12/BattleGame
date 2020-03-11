@@ -7,8 +7,8 @@ import java.awt.*;
 import java.util.Stack;
 
 public class AIPathing {
-    private Stack<Point> path = new Stack<>();
-    private Stack<Point> neighbors = new Stack<>();
+    public static Stack<Point> path = new Stack<>();
+    public static Stack<Point> neighbors = new Stack<>();
     public static boolean[][] visited;
 
 
@@ -37,7 +37,7 @@ public class AIPathing {
 //        //or give it access to opponents data since players already have locations?
 //    }
 
-    public static Stack<Point> findPath(Icons[][] map, Point p){
+    public static Stack<Point> getNeighbors(Icons[][] map, Point p){
         Stack<Point> surroundingNodes = new Stack<Point>();
         Point left = new Point();
         Point right = new Point();
@@ -78,10 +78,17 @@ public class AIPathing {
             return false;
     }
 
-    public boolean depthFirstSearch(Icons[][] map, Point p){
+    public static boolean depthFirstSearch(Icons[][] map, Point p, int maxDepth) {
+        return depthFirstSearch(map, p, maxDepth, 0);
+    }
+
+    public static boolean depthFirstSearch(Icons[][] map, Point p, int maxDepth, int currentDepth){
         visited = createVisitedArray(map);
-        neighbors = findPath(map, p);
-        if (map[p.x][p.y] == Icons.B){
+        neighbors = getNeighbors(map, p);
+        if (currentDepth > maxDepth) {
+            return false;
+        }
+        if (map[p.x][p.y] == Icons.A){
             return true;
         }
         if (neighbors.isEmpty()){
@@ -89,9 +96,9 @@ public class AIPathing {
         }
         for (int i=0; i<neighbors.size(); i++){
             visited[neighbors.get(i).x][neighbors.get(i).y] = true;
-            depthFirstSearch(map, neighbors.get(i));
+            //depthFirstSearch(map, neighbors.get(i), maxDepth, currentDepth + 1);
             // if above returns true, add neighbors[i] to stack
-            boolean b = depthFirstSearch(map, p);
+            boolean b = depthFirstSearch(map, p, maxDepth, currentDepth + 1);
             if(b){
                 path.add(neighbors.get(i));
             }
@@ -102,39 +109,76 @@ public class AIPathing {
     }
 
 
-//    public Point depthFirstSearch(Icons[][] map, int row, int col, boolean[][] visited) {
-//        visited = createVisitedArray(map);
-//        boolean cellIsPassable = map[row][col] == Icons._;
-//        Point opponentPosition = null;
-//        int height = map.length;
-//        int length = map[0].length;
-//
-//            if (row < 0 || col < 0 || row >= height || col >= length || visited[row][col])
-//                cellIsPassable = false;
-//
-//            //mark cell visited
-//            if (cellIsPassable) {
-//                visited[row][col] = true;
-//                depthFirstSearch(map, row + 1, col, visited); //go right
-//                depthFirstSearch(map, row - 1, col, visited); //go left
-//                depthFirstSearch(map, row, col + 1, visited); //go down
-//                depthFirstSearch(map, row, col - 1, visited); //go up
-//            }
-//        return new Point();
-//        }
-
-
-    public void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer) {
+    public static void AIMoveTowardsOpponent(Icons[][] map, Player AIPlayer) {
         int currentRow = AIPlayer.getRow();
         int currentCol = AIPlayer.getCol();
         Point AICurrentLocation = new Point(currentRow, currentCol);
         // clear the stack
         path.clear();
-        Stack<Point> path = findPath(map, AICurrentLocation);
-        for (int i = 0; i < AIPlayer.getDexterity(); i++) {
-            Point p = path.pop();
-            AIPlayer.setCol(p.x);
-            AIPlayer.setRow(p.y);
+        if (depthFirstSearch(map, AICurrentLocation, 10)) {
+            for (int i = 0; i < AIPlayer.getDexterity(); i++) {
+                Point p = path.pop();
+                AIPlayer.setCol(p.x);
+                AIPlayer.setRow(p.y);
+            }
+        } else {
+            int moveCount = 0;
+            do {
+                int spaceAbove = AIPlayer.getRow() - 1;
+                int spaceBelow = AIPlayer.getCol() + 1;
+                int spaceRight = AIPlayer.getRow() + 1;
+                int spaceLeft = AIPlayer.getCol() - 1;
+
+                Point pointAbove = new Point(spaceAbove, currentCol);
+                Point pointBelow = new Point(spaceBelow, currentCol);
+                Point pointLeft = new Point(currentRow, spaceLeft);
+                Point pointRight = new Point(currentRow, spaceRight);
+
+                if(spaceLeft == map[0].length && canTraverse(map, pointLeft)) {
+                    moveLeft(map, AIPlayer);
+                    System.out.println("Computer moved left");
+                    moveCount++;
+                } else if (spaceRight < map[0].length && canTraverse(map, pointRight)) {
+                    moveRight(map, AIPlayer);
+                    System.out.println("Computer moved right");
+                    moveCount++;
+                } else if(spaceBelow == map.length && canTraverse(map, pointBelow)){
+                    moveDown(map, AIPlayer);
+                    System.out.println("Computer moved down");
+                } else if(spaceAbove < map.length && canTraverse(map, pointAbove)) {
+                    moveUp(map, AIPlayer);
+                    System.out.println("Computer moved up");
+                    moveCount++;
+                }
+            } while(moveCount <= AIPlayer.getDexterity());
         }
+    }
+
+    public static void moveUp(Icons[][] map, Player AIPlayer){
+        int row = AIPlayer.getRow();
+        int col = AIPlayer.getCol();
+        AIPlayer.setRow(row - 1);
+        AIPlayer.setCol(col);
+    }
+
+    public static void moveDown(Icons[][] map, Player AIPlayer){
+        int row = AIPlayer.getRow();
+        int col = AIPlayer.getCol();
+        AIPlayer.setRow(row + 1);
+        AIPlayer.setCol(col);
+    }
+
+    public static void moveLeft(Icons[][] map, Player AIPlayer){
+        int row = AIPlayer.getRow();
+        int col = AIPlayer.getCol();
+        AIPlayer.setRow(row);
+        AIPlayer.setCol(col - 1);
+    }
+
+    public static void moveRight(Icons[][] map, Player AIPlayer){
+        int row = AIPlayer.getRow();
+        int col = AIPlayer.getCol();
+        AIPlayer.setRow(row);
+        AIPlayer.setCol(col + 1);
     }
 }

@@ -278,7 +278,8 @@ public class GameController {
     }
 
     public static void makeAIPlayer(Icons icon){
-        AIGenerator.generateAIPlayer();
+        Player aiPlayer = AIPlayerGenerator.generateAIPlayer(icon);
+        addPlayer(aiPlayer);
     }
 
     public static Player createRanger(String name, Icons icon){
