@@ -183,6 +183,22 @@ public class GameController {
         boolean hasHit = ((rng.nextInt(100) + 1) >= hitChance);
         System.out.println(hasHit);
         ConsoleIO.delay(3);
+        int damage = calculateDamage(attacker, defender);
+        System.out.println(damage);
+    }
+
+    private static int calculateDamage(Player attacker, Player defender) {
+        int damage = 0;
+        if(attacker.getClass().getSimpleName().equalsIgnoreCase("wizard")){
+            damage = ((Wizard)attacker).getSpells().get(0).getAffectRating();
+            if(defender.getArmor().armorType == ArmorType.PADDED){
+                damage = (int)(damage * 1.5f);
+            }
+            else if(defender.getArmor().armorType == ArmorType.PLATE){
+                damage = (int)(damage * .75f);
+            }
+        }
+        return damage;
     }
 
     private static int hitChance(Player attacker, Player defender) {
