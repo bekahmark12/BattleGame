@@ -140,38 +140,25 @@ public class AIPathing {
                 int y = directionPoint.y;
                 Point primDir = (Math.abs(x) > y ? (x > -1 ? primDir = pointBelow : pointAbove) : (y > -1 ? primDir = pointRight : pointLeft));
 
-                if(primDir == pointAbove && valid(map, pointAbove)){
-                    moveUp(map, AIPlayer);
-                    moveCount++;
-                    if(!valid(map, pointAbove)){
-                        if(valid(map, pointBelow)){
-                            moveDown(map, AIPlayer);
-                            moveCount++;
-                        }
-                    }
-                } else if(primDir == pointBelow && valid(map, pointBelow)){
-                    moveDown(map, AIPlayer);
-                    moveCount++;
-                    if(!valid(map, pointBelow)){
-                        if(valid(map, pointAbove)){
-                            moveUp(map, AIPlayer);
-                            moveCount++;
+                if(primDir == pointAbove){
+                    if(valid(map, pointAbove)){
+                        moveUp(map, AIPlayer);
+                        moveCount++;
                         } else {
-                            moveLeft(map, AIPlayer);
-                            moveCount++;
-                        }
+                            if(valid(map, pointBelow)){
+                                moveDown(map, AIPlayer);
+                                moveCount++;
+                            }
                     }
-                } else if(primDir == pointLeft && valid(map, pointLeft)){
-                    moveLeft(map, AIPlayer);
-                    moveCount++;
-                    if(!valid(map, pointLeft)){
-                        if(valid(map, pointRight)){
-                            moveRight(map, AIPlayer);
-                            moveCount++;
-                        } else {
-                            moveUp(map, AIPlayer);
-                            moveCount++;
-                        }
+
+                } else if(primDir == pointBelow){
+                    if(valid(map, pointBelow)){
+
+                    }
+
+                } else if(primDir == pointLeft){
+                    if(valid(map, pointLeft)){
+                        
                     }
                 } else if(primDir == pointRight && valid(map, pointRight)){
                     moveRight(map, AIPlayer);
