@@ -43,10 +43,10 @@ public class AIPathing {
         Point right = new Point();
         Point down = new Point();
         Point up = new Point();
-        down.x = p.x - 1;
+        down.x = p.x + 1;
         down.y = p.y;
         if (valid(map, down)) surroundingNodes.add(down);
-        up.x = p.x + 1;
+        up.x = p.x - 1;
         up.y = p.y;
         if (valid(map, up)) surroundingNodes.add(up);
         left.x = p.x;
@@ -66,7 +66,7 @@ public class AIPathing {
     }
 
     public static boolean isInBounds(Icons[][] map, Point p){
-        if (p.x < map[0].length && p.x > -1 && p.y < map.length  && p.y > -1){
+        if (p.x < map.length && p.x > -1 && p.y < map[0].length  && p.y > -1){
             return true;
         } else
             return false;
@@ -118,8 +118,8 @@ public class AIPathing {
         if (depthFirstSearch(map, AICurrentLocation, 10)) {
             for (int i = 0; i < AIPlayer.getDexterity(); i++) {
                 Point p = path.pop();
-                AIPlayer.setCol(p.x);
-                AIPlayer.setRow(p.y);
+                AIPlayer.setCol(p.y);
+                AIPlayer.setRow(p.x);
             }
         } else {
             int moveCount = 0;
@@ -134,24 +134,50 @@ public class AIPathing {
                 Point pointLeft = new Point(currentRow, spaceLeft);
                 Point pointRight = new Point(currentRow, spaceRight);
 
-                if(spaceLeft == map[0].length && canTraverse(map, pointLeft)) {
-                    moveLeft(map, AIPlayer);
-                    System.out.println("Computer moved left");
-                    moveCount++;
-                } else if (spaceRight < map[0].length && canTraverse(map, pointRight)) {
-                    moveRight(map, AIPlayer);
-                    System.out.println("Computer moved right");
-                    moveCount++;
-                } else if(spaceBelow == map.length && canTraverse(map, pointBelow)){
-                    moveDown(map, AIPlayer);
-                    System.out.println("Computer moved down");
-                } else if(spaceAbove < map.length && canTraverse(map, pointAbove)) {
-                    moveUp(map, AIPlayer);
-                    System.out.println("Computer moved up");
-                    moveCount++;
-                }
+                Point primDir =
+
+//                if(spaceLeft == map[0].length && canTraverse(map, pointLeft)) {
+//                    moveLeft(map, AIPlayer);
+//                    System.out.println("Computer moved left");
+//                    moveCount++;
+//                } else if (spaceRight < map[0].length && canTraverse(map, pointRight)) {
+//                    moveRight(map, AIPlayer);
+//                    System.out.println("Computer moved right");
+//                    moveCount++;
+//                } else if(spaceBelow == map.length && canTraverse(map, pointBelow)){
+//                    moveDown(map, AIPlayer);
+//                    System.out.println("Computer moved down");
+//                } else if(spaceAbove < map.length && canTraverse(map, pointAbove)) {
+//                    moveUp(map, AIPlayer);
+//                    System.out.println("Computer moved up");
+//                    moveCount++;
+//                }
+
+
+                //get the coord point of player and AI
+                //subtract player - AI into directional point
+
+
+
+                // if absolute of |x| is greater than y
+                    // if x is greater than -1
+                        // go down
+                    // else
+                        // up
+                // else
+                    // if absolute |y| is greater than -1
+                        //go right
+                            //else go left
+
             } while(moveCount <= AIPlayer.getDexterity());
         }
+    }
+
+    public static Point getDirectionBetweenPlayers(Player AI, Player opponent){
+        Point AILocation = new Point(AI.getRow(), AI.getCol());
+        Point opponentLocation = new Point(opponent.getRow(), opponent.getCol());
+        Point directionPoint = new Point((opponentLocation.x - AILocation.x), (opponentLocation.y - opponentLocation.y));
+        return directionPoint;
     }
 
     public static void moveUp(Icons[][] map, Player AIPlayer){

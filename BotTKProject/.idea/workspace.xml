@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d272649-c78a-44ab-9044-8628df4b8b33" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/META-INF/BotTKProject.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/META-INF/BotTKProject.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/controllers/AIPathing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/controllers/AIPathing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/controllers/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BotTKProject/models/AIPlayerGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BotTKProject/models/AIPlayerGenerator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/AIPathing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AIPathing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/AIPlayerGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/AIPlayerGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +58,18 @@
       <recent name="C:\Users\Ethan Wilson\OneDrive - Neumont College of Computer Science\Assignments\OOP\Battle-of-the-True-King\BotTKProject\src" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="prog.Main" />
@@ -81,18 +86,6 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -198,7 +191,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controllers/GameController.java</url>
-          <line>280</line>
+          <line>296</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
