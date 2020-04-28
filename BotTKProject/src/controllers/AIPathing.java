@@ -158,7 +158,7 @@ public class AIPathing {
 
                 } else if(primDir == pointLeft){
                     if(valid(map, pointLeft)){
-                        
+
                     }
                 } else if(primDir == pointRight && valid(map, pointRight)){
                     moveRight(map, AIPlayer);
